@@ -3,435 +3,147 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Career Personality Test / Test de Personalidad Vocacional</title>
+<title>Vocational &amp; Personality Exploration Test</title>
 <style>
   :root {
-    --bg: #FAFAF8;
-    --surface: #FFFFFF;
-    --border: #E4E2DC;
-    --border-soft: #F0EEE8;
-    --text-primary: #1A1A18;
-    --text-secondary: #5C5C56;
-    --text-tertiary: #9A9A92;
-    --accent-purple: #5B52C8;
-    --accent-purple-light: #EEEDFB;
-    --accent-green: #1A8C68;
-    --accent-green-light: #E2F4ED;
-    --accent-amber: #C47B0A;
-    --accent-amber-light: #FEF3DC;
-    --riasec-r: #4A8B3F;
-    --riasec-i: #5B52C8;
-    --riasec-a: #C24D7A;
-    --riasec-s: #1A8C68;
-    --riasec-e: #C85228;
-    --riasec-c: #2E6DB4;
-    --b5-e: #5B52C8;
-    --b5-o: #C24D7A;
-    --b5-a: #1A8C68;
-    --b5-c: #2E6DB4;
-    --b5-n: #C85228;
-    --radius-sm: 6px;
-    --radius-md: 10px;
-    --radius-lg: 14px;
-    --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.04);
+    --bg:#FAFAF8;--surface:#FFFFFF;--border:#E4E2DC;--border-soft:#F0EEE8;
+    --text-primary:#1A1A18;--text-secondary:#5C5C56;--text-tertiary:#9A9A92;
+    --accent-purple:#5B52C8;--accent-purple-light:#EEEDFB;
+    --accent-green:#1A8C68;--accent-green-light:#E2F4ED;
+    --accent-amber:#C47B0A;--accent-amber-light:#FEF3DC;
+    --accent-teal:#1A7A8C;--accent-teal-light:#E2F2F4;
+    --riasec-r:#4A8B3F;--riasec-i:#5B52C8;--riasec-a:#C24D7A;
+    --riasec-s:#1A8C68;--riasec-e:#C85228;--riasec-c:#2E6DB4;
+    --b5-e:#5B52C8;--b5-o:#C24D7A;--b5-a:#1A8C68;--b5-c:#2E6DB4;--b5-n:#C85228;
+    --radius-sm:6px;--radius-md:10px;--radius-lg:14px;
+    --shadow:0 1px 3px rgba(0,0,0,0.08),0 4px 12px rgba(0,0,0,0.04);
   }
-
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-    background: var(--bg);
-    color: var(--text-primary);
-    min-height: 100vh;
-    line-height: 1.6;
-  }
-
-  .page {
-    max-width: 680px;
-    margin: 0 auto;
-    padding: 24px 20px 80px;
-  }
-
-  /* Header */
-  .header {
-    text-align: center;
-    padding: 40px 0 32px;
-    border-bottom: 1px solid var(--border);
-    margin-bottom: 32px;
-  }
-  .header-eyebrow {
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: .1em;
-    text-transform: uppercase;
-    color: var(--text-tertiary);
-    margin-bottom: 10px;
-  }
-  .header-title {
-    font-size: 26px;
-    font-weight: 700;
-    color: var(--text-primary);
-    line-height: 1.3;
-    margin-bottom: 6px;
-  }
-  .header-subtitle {
-    font-size: 15px;
-    color: var(--text-secondary);
-  }
-
-  /* Lang toggle */
-  .lang-toggle {
-    display: flex;
-    gap: 8px;
-    justify-content: center;
-    margin-bottom: 28px;
-  }
-  .lang-btn {
-    padding: 6px 18px;
-    border: 1.5px solid var(--border);
-    border-radius: 99px;
-    background: var(--surface);
-    cursor: pointer;
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--text-secondary);
-    transition: all .15s;
-  }
-  .lang-btn.active {
-    background: var(--accent-purple);
-    border-color: var(--accent-purple);
-    color: #fff;
-  }
-
-  /* Screen management */
-  .screen { display: none; }
-  .screen.active { display: block; }
-
-  /* Intro screen */
-  .intro-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    padding: 28px;
-    margin-bottom: 20px;
-    box-shadow: var(--shadow);
-  }
-  .intro-lead {
-    font-size: 16px;
-    color: var(--text-primary);
-    line-height: 1.7;
-    margin-bottom: 20px;
-  }
-  .phases {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-bottom: 20px;
-  }
-  .phase-card {
-    background: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-md);
-    padding: 14px 16px;
-  }
-  .phase-badge {
-    display: inline-block;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: .06em;
-    text-transform: uppercase;
-    padding: 2px 8px;
-    border-radius: 99px;
-    margin-bottom: 6px;
-  }
-  .badge-r { background: var(--accent-purple-light); color: var(--accent-purple); }
-  .badge-b { background: var(--accent-green-light); color: var(--accent-green); }
-  .phase-name { font-size: 14px; font-weight: 600; color: var(--text-primary); margin-bottom: 2px; }
-  .phase-sub { font-size: 12px; color: var(--text-secondary); }
-  .intro-note { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
-
-  /* Progress */
-  .progress-wrap { margin-bottom: 24px; }
-  .progress-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 8px;
-  }
-  .section-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: .06em;
-    text-transform: uppercase;
-    padding: 3px 10px;
-    border-radius: 99px;
-  }
-  .section-badge.riasec { background: var(--accent-purple-light); color: var(--accent-purple); }
-  .section-badge.big5 { background: var(--accent-green-light); color: var(--accent-green); }
-  .q-counter { font-size: 12px; color: var(--text-tertiary); font-weight: 500; }
-  .progress-track {
-    height: 4px;
-    background: var(--border);
-    border-radius: 99px;
-    overflow: hidden;
-  }
-  .progress-fill {
-    height: 4px;
-    background: linear-gradient(90deg, var(--accent-purple), var(--accent-green));
-    border-radius: 99px;
-    transition: width .4s ease;
-  }
-
-  /* Question card */
-  .q-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    padding: 28px;
-    margin-bottom: 20px;
-    box-shadow: var(--shadow);
-  }
-  .q-instruction {
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: .05em;
-    text-transform: uppercase;
-    color: var(--text-tertiary);
-    margin-bottom: 16px;
-  }
-  .q-text {
-    font-size: 16px;
-    color: var(--text-secondary);
-    margin-bottom: 20px;
-    line-height: 1.6;
-  }
-
-  /* Forced choice */
-  .choice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  @media (max-width: 480px) { .choice-grid { grid-template-columns: 1fr; } }
-  .choice-btn {
-    padding: 16px;
-    border: 1.5px solid var(--border);
-    border-radius: var(--radius-md);
-    background: var(--surface);
-    cursor: pointer;
-    text-align: left;
-    font-size: 14px;
-    color: var(--text-primary);
-    line-height: 1.5;
-    transition: all .15s;
-    position: relative;
-  }
-  .choice-btn:hover { background: var(--bg); border-color: var(--accent-purple); }
-  .choice-btn.selected {
-    background: var(--accent-purple-light);
-    border-color: var(--accent-purple);
-    color: var(--accent-purple);
-    font-weight: 500;
-  }
-  .choice-letter {
-    display: block;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: .08em;
-    text-transform: uppercase;
-    color: var(--text-tertiary);
-    margin-bottom: 6px;
-  }
-  .choice-btn.selected .choice-letter { color: var(--accent-purple); opacity: .7; }
-
-  /* Likert */
-  .likert-endpoints {
-    display: flex;
-    justify-content: space-between;
-    font-size: 11px;
-    color: var(--text-tertiary);
-    margin-bottom: 10px;
-    padding: 0 2px;
-  }
-  .likert-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
-  .likert-btn {
-    padding: 12px 4px;
-    border: 1.5px solid var(--border);
-    border-radius: var(--radius-md);
-    background: var(--surface);
-    cursor: pointer;
-    text-align: center;
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--text-secondary);
-    transition: all .15s;
-    line-height: 1;
-  }
-  .likert-btn:hover { background: var(--bg); border-color: var(--accent-green); }
-  .likert-btn.selected {
-    background: var(--accent-green-light);
-    border-color: var(--accent-green);
-    color: var(--accent-green);
-  }
-
-  /* Nav */
-  .nav-row {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 12px;
-  }
-  .btn {
-    padding: 12px 28px;
-    border-radius: var(--radius-md);
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    border: 1.5px solid transparent;
-    transition: all .15s;
-  }
-  .btn-primary {
-    background: var(--accent-purple);
-    color: #fff;
-    border-color: var(--accent-purple);
-  }
-  .btn-primary:hover { background: #4840A8; border-color: #4840A8; }
-  .btn-primary:disabled { opacity: .4; cursor: not-allowed; }
-  .btn-outline {
-    background: var(--surface);
-    color: var(--text-primary);
-    border-color: var(--border);
-  }
-  .btn-outline:hover { background: var(--bg); }
-
-  /* Results */
-  .results-header {
-    text-align: center;
-    padding: 32px 0 24px;
-    border-bottom: 1px solid var(--border);
-    margin-bottom: 28px;
-  }
-  .results-title { font-size: 22px; font-weight: 700; margin-bottom: 6px; }
-  .results-sub { font-size: 14px; color: var(--text-secondary); }
-
-  .result-block {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    padding: 24px;
-    margin-bottom: 16px;
-    box-shadow: var(--shadow);
-  }
-  .result-block-title {
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: .06em;
-    text-transform: uppercase;
-    color: var(--text-tertiary);
-    margin-bottom: 16px;
-  }
-  .holland-code {
-    font-size: 42px;
-    font-weight: 800;
-    letter-spacing: .12em;
-    color: var(--accent-purple);
-    margin-bottom: 4px;
-  }
-  .holland-label { font-size: 13px; color: var(--text-secondary); margin-bottom: 20px; }
-
-  .bar-row { margin-bottom: 12px; }
-  .bar-meta {
-    display: flex;
-    justify-content: space-between;
-    font-size: 13px;
-    margin-bottom: 5px;
-  }
-  .bar-meta-name { font-weight: 600; color: var(--text-primary); }
-  .bar-meta-val { color: var(--text-secondary); }
-  .bar-track {
-    height: 8px;
-    background: var(--border-soft);
-    border-radius: 99px;
-    overflow: hidden;
-  }
-  .bar-fill {
-    height: 8px;
-    border-radius: 99px;
-    transition: width 1s ease;
-  }
-
-  .profile-text {
-    background: var(--bg);
-    border-radius: var(--radius-md);
-    padding: 16px 18px;
-    font-size: 14px;
-    color: var(--text-primary);
-    line-height: 1.75;
-    margin-top: 16px;
-    border-left: 3px solid var(--accent-purple);
-  }
-  .profile-text.green { border-left-color: var(--accent-green); }
-
-  .careers-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-    gap: 8px;
-    margin-top: 12px;
-  }
-  .career-pill {
-    padding: 9px 12px;
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
-    font-size: 13px;
-    color: var(--text-primary);
-    text-align: center;
-    background: var(--bg);
-  }
-
-  .divider { height: 1px; background: var(--border); margin: 8px 0 24px; }
-
-  .restart-row { text-align: center; padding: 16px 0 0; }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text-primary);min-height:100vh;line-height:1.6}
+  .page{max-width:680px;margin:0 auto;padding:24px 20px 80px}
+  .header{text-align:center;padding:40px 0 32px;border-bottom:1px solid var(--border);margin-bottom:32px}
+  .header-eyebrow{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--text-tertiary);margin-bottom:10px}
+  .header-title{font-size:22px;font-weight:700;color:var(--text-primary);line-height:1.3;margin-bottom:6px}
+  .header-subtitle{font-size:13px;color:var(--text-secondary);font-style:italic}
+  .lang-toggle{display:flex;gap:8px;justify-content:center;margin-bottom:28px}
+  .lang-btn{padding:6px 18px;border:1.5px solid var(--border);border-radius:99px;background:var(--surface);cursor:pointer;font-size:13px;font-weight:500;color:var(--text-secondary);transition:all .15s}
+  .lang-btn.active{background:var(--accent-purple);border-color:var(--accent-purple);color:#fff}
+  .screen{display:none}.screen.active{display:block}
+  .intro-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px;margin-bottom:20px;box-shadow:var(--shadow)}
+  .intro-lead{font-size:15px;color:var(--text-primary);line-height:1.7;margin-bottom:20px}
+  .phases{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:20px}
+  .phase-card{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-md);padding:12px 14px}
+  .phase-badge{display:inline-block;font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:99px;margin-bottom:6px}
+  .badge-r{background:var(--accent-purple-light);color:var(--accent-purple)}
+  .badge-b{background:var(--accent-green-light);color:var(--accent-green)}
+  .badge-t{background:var(--accent-teal-light);color:var(--accent-teal)}
+  .phase-name{font-size:13px;font-weight:600;color:var(--text-primary);margin-bottom:2px}
+  .phase-sub{font-size:11px;color:var(--text-secondary)}
+  .intro-note{font-size:13px;color:var(--text-secondary);line-height:1.6}
+  .progress-wrap{margin-bottom:24px}
+  .progress-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+  .section-badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:3px 10px;border-radius:99px}
+  .section-badge.riasec{background:var(--accent-purple-light);color:var(--accent-purple)}
+  .section-badge.big5{background:var(--accent-green-light);color:var(--accent-green)}
+  .section-badge.refine{background:var(--accent-teal-light);color:var(--accent-teal)}
+  .q-counter{font-size:12px;color:var(--text-tertiary);font-weight:500}
+  .progress-track{height:4px;background:var(--border);border-radius:99px;overflow:hidden}
+  .progress-fill{height:4px;background:linear-gradient(90deg,var(--accent-purple),var(--accent-green),var(--accent-teal));border-radius:99px;transition:width .4s ease}
+  .q-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px;margin-bottom:20px;box-shadow:var(--shadow)}
+  .q-instruction{font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--text-tertiary);margin-bottom:12px}
+  .q-text{font-size:15px;color:var(--text-secondary);margin-bottom:20px;line-height:1.6}
+  .choice-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:480px){.choice-grid{grid-template-columns:1fr}}
+  .choice-btn{padding:16px;border:1.5px solid var(--border);border-radius:var(--radius-md);background:var(--surface);cursor:pointer;text-align:left;font-size:14px;color:var(--text-primary);line-height:1.5;transition:all .15s}
+  .choice-btn:hover{background:var(--bg);border-color:var(--accent-purple)}
+  .choice-btn.selected{background:var(--accent-purple-light);border-color:var(--accent-purple);color:var(--accent-purple);font-weight:500}
+  .choice-btn.refine-btn:hover{border-color:var(--accent-teal)}
+  .choice-btn.refine-btn.selected{background:var(--accent-teal-light);border-color:var(--accent-teal);color:var(--accent-teal)}
+  .choice-letter{display:block;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-tertiary);margin-bottom:6px}
+  .choice-btn.selected .choice-letter{color:var(--accent-purple);opacity:.7}
+  .choice-btn.refine-btn.selected .choice-letter{color:var(--accent-teal);opacity:.7}
+  .likert-endpoints{display:flex;justify-content:space-between;font-size:11px;color:var(--text-tertiary);margin-bottom:10px;padding:0 2px}
+  .likert-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+  .likert-btn{padding:12px 4px;border:1.5px solid var(--border);border-radius:var(--radius-md);background:var(--surface);cursor:pointer;text-align:center;font-size:16px;font-weight:600;color:var(--text-secondary);transition:all .15s;line-height:1}
+  .likert-btn:hover{background:var(--bg);border-color:var(--accent-green)}
+  .likert-btn.selected{background:var(--accent-green-light);border-color:var(--accent-green);color:var(--accent-green)}
+  .nav-row{display:flex;justify-content:flex-end;align-items:center;gap:12px}
+  .btn{padding:12px 28px;border-radius:var(--radius-md);font-size:14px;font-weight:600;cursor:pointer;border:1.5px solid transparent;transition:all .15s}
+  .btn-primary{background:var(--accent-purple);color:#fff;border-color:var(--accent-purple)}
+  .btn-primary:hover{background:#4840A8;border-color:#4840A8}
+  .btn-primary:disabled{opacity:.4;cursor:not-allowed}
+  .btn-outline{background:var(--surface);color:var(--text-primary);border-color:var(--border)}
+  .btn-outline:hover{background:var(--bg)}
+  .results-header{text-align:center;padding:32px 0 24px;border-bottom:1px solid var(--border);margin-bottom:28px}
+  .results-title{font-size:22px;font-weight:700;margin-bottom:6px}
+  .results-sub{font-size:14px;color:var(--text-secondary)}
+  .disclaimer-box{background:var(--accent-amber-light);border:1px solid var(--accent-amber);border-radius:var(--radius-md);padding:14px 18px;font-size:13px;color:var(--text-secondary);line-height:1.65;margin-bottom:24px}
+  .result-block{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;margin-bottom:16px;box-shadow:var(--shadow)}
+  .result-block.refined{border-color:var(--accent-teal);background:var(--accent-teal-light)}
+  .result-block-title{font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text-tertiary);margin-bottom:16px}
+  .result-block.refined .result-block-title{color:var(--accent-teal)}
+  .holland-code{font-size:42px;font-weight:800;letter-spacing:.12em;color:var(--accent-purple);margin-bottom:4px}
+  .holland-label{font-size:13px;color:var(--text-secondary);margin-bottom:20px}
+  .bar-row{margin-bottom:12px}
+  .bar-meta{display:flex;justify-content:space-between;font-size:13px;margin-bottom:5px}
+  .bar-meta-name{font-weight:600;color:var(--text-primary)}
+  .bar-meta-val{color:var(--text-secondary);font-weight:500}
+  .bar-track{height:8px;background:var(--border-soft);border-radius:99px;overflow:hidden}
+  .bar-fill{height:8px;border-radius:99px;transition:width 1s ease}
+  .profile-text{background:var(--bg);border-radius:var(--radius-md);padding:16px 18px;font-size:14px;color:var(--text-primary);line-height:1.75;margin-top:16px;border-left:3px solid var(--accent-purple)}
+  .profile-text.green{border-left-color:var(--accent-green)}
+  .careers-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin-top:12px}
+  .career-pill{padding:9px 12px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:13px;color:var(--text-primary);text-align:center;background:var(--bg)}
+  .career-pill.refined{background:white;border-color:var(--accent-teal);color:var(--accent-teal);font-weight:500}
+  .divider{height:1px;background:var(--border);margin:8px 0 24px}
+  .restart-row{text-align:center;padding:16px 0 0}
+  .refine-intro{background:var(--accent-teal-light);border:1px solid var(--accent-teal);border-radius:var(--radius-md);padding:14px 18px;font-size:13px;color:var(--accent-teal);line-height:1.6;margin-bottom:16px;display:none}
+  .refine-intro.visible{display:block}
 </style>
 </head>
 <body>
 <div class="page">
 
-  <!-- HEADER -->
   <div class="header">
     <div class="header-eyebrow" id="hdr-eyebrow">Chapter 4</div>
-    <div class="header-title" id="hdr-title">Personality & Career Fit</div>
-    <div class="header-subtitle" id="hdr-sub">RIASEC + Big Five Assessment</div>
+    <div class="header-title" id="hdr-title">Vocational &amp; Personality Exploration Test</div>
+    <div class="header-subtitle" id="hdr-sub">Based on the RIASEC and Big Five models</div>
   </div>
 
-  <!-- LANG TOGGLE (shared) -->
   <div class="lang-toggle">
     <button class="lang-btn active" onclick="setLang('en')">English</button>
     <button class="lang-btn" onclick="setLang('es')">Español</button>
   </div>
 
-  <!-- INTRO SCREEN -->
+  <!-- INTRO -->
   <div id="screen-intro" class="screen active">
     <div class="intro-card">
-      <p class="intro-lead" id="intro-lead">This test combines two validated frameworks to help you understand yourself and how your personality connects to the world of work. There are no right or wrong answers — only honest ones.</p>
+      <p class="intro-lead" id="intro-lead">This exploration tool combines two widely used models to support self-understanding and career exploration: the RIASEC model of vocational interests and the Big Five personality model. There are no right or wrong answers — only honest ones.</p>
       <div class="phases">
         <div class="phase-card">
           <span class="phase-badge badge-r" id="p1-badge">Part 1 · RIASEC</span>
-          <div class="phase-name" id="p1-name">Holland Code</div>
-          <div class="phase-sub" id="p1-sub">30 questions — forced choice</div>
+          <div class="phase-name" id="p1-name">Vocational Interests</div>
+          <div class="phase-sub" id="p1-sub">30 questions</div>
         </div>
         <div class="phase-card">
           <span class="phase-badge badge-b" id="p2-badge">Part 2 · Big Five</span>
           <div class="phase-name" id="p2-name">Personality Traits</div>
-          <div class="phase-sub" id="p2-sub">25 questions — rating scale</div>
+          <div class="phase-sub" id="p2-sub">25 questions</div>
+        </div>
+        <div class="phase-card">
+          <span class="phase-badge badge-t" id="p3-badge">Part 3 · Refine</span>
+          <div class="phase-name" id="p3-name">Profile Refinement</div>
+          <div class="phase-sub" id="p3-sub">8 questions</div>
         </div>
       </div>
-      <p class="intro-note" id="intro-note">Estimated time: 15–20 minutes. Answer honestly — this is for you, not for anyone else.</p>
+      <p class="intro-note" id="intro-note">Estimated time: 20–25 minutes. Answer honestly — this is for you, not for anyone else.</p>
     </div>
     <div style="text-align:center">
       <button class="btn btn-primary" onclick="startTest()" id="btn-start" style="padding:14px 40px;font-size:15px">Begin / Comenzar →</button>
     </div>
   </div>
 
-  <!-- QUESTION SCREEN -->
+  <!-- QUESTIONS -->
   <div id="screen-q" class="screen">
     <div class="progress-wrap">
       <div class="progress-header">
@@ -440,6 +152,7 @@
       </div>
       <div class="progress-track"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
     </div>
+    <div class="refine-intro" id="refine-intro"></div>
     <div class="q-card">
       <div class="q-instruction" id="q-instruction"></div>
       <div class="q-text" id="q-text"></div>
@@ -450,485 +163,554 @@
     </div>
   </div>
 
-  <!-- RESULTS SCREEN -->
+  <!-- RESULTS -->
   <div id="screen-results" class="screen">
     <div class="results-header">
       <div class="results-title" id="r-title">Your Results</div>
-      <div class="results-sub" id="r-sub">Based on your 55 answers across both assessments</div>
+      <div class="results-sub" id="r-sub">Based on your 63 answers</div>
     </div>
+    <div class="disclaimer-box" id="r-disclaimer">These results are for self-reflection and career exploration only. They do not constitute a psychological diagnosis and do not replace a professional evaluation.</div>
 
-    <!-- RIASEC block -->
     <div class="result-block">
-      <div class="result-block-title" id="r-riasec-label">RIASEC Profile</div>
+      <div class="result-block-title" id="r-riasec-label">RIASEC Profile — Vocational Interests</div>
       <div class="holland-code" id="r-code"></div>
       <div class="holland-label" id="r-code-label">Your Holland Code</div>
       <div id="r-riasec-bars"></div>
       <div class="profile-text" id="r-riasec-desc"></div>
     </div>
-
     <div class="divider"></div>
 
-    <!-- Big Five block -->
     <div class="result-block">
-      <div class="result-block-title" id="r-b5-label">Big Five Profile</div>
+      <div class="result-block-title" id="r-b5-label">Big Five — Personality Traits</div>
       <div id="r-b5-bars"></div>
       <div class="profile-text green" id="r-b5-desc"></div>
     </div>
-
     <div class="divider"></div>
 
-    <!-- Career matches -->
     <div class="result-block">
-      <div class="result-block-title" id="r-careers-label">Career Matches</div>
-      <p style="font-size:13px;color:var(--text-secondary);margin-bottom:4px" id="r-careers-sub">Based on your combined profile</p>
+      <div class="result-block-title" id="r-careers-label">Areas Worth Exploring</div>
+      <p style="font-size:13px;color:var(--text-secondary);margin-bottom:4px" id="r-careers-sub">Based on your RIASEC profile</p>
       <div class="careers-grid" id="r-careers-grid"></div>
     </div>
-
     <div class="divider"></div>
 
-    <!-- Combined profile -->
+    <div class="result-block refined" id="r-refined-block">
+      <div class="result-block-title" id="r-refined-label">Your Profile May Specifically Point Toward</div>
+      <p style="font-size:13px;color:var(--accent-teal);margin-bottom:4px" id="r-refined-sub">Based on your refinement answers</p>
+      <div class="careers-grid" id="r-refined-grid"></div>
+    </div>
+    <div class="divider"></div>
+
     <div class="result-block">
-      <div class="result-block-title" id="r-profile-label">Your Personality Profile</div>
+      <div class="result-block-title" id="r-profile-label">Your Exploration Profile</div>
       <div class="profile-text" id="r-profile-text"></div>
     </div>
 
     <div class="restart-row">
-      <button class="btn btn-outline" onclick="restart()" id="btn-restart">↩ Retake test / Repetir test</button>
+      <button class="btn btn-outline" onclick="restart()" id="btn-restart">↩ Retake / Repetir</button>
     </div>
   </div>
 
 </div>
-
 <script>
-var lang = 'en';
-var currentQ = 0;
-var answers = {};
+var lang='en', currentQ=0, answers={};
+var TOTAL_RQ=30, TOTAL_BQ=25, TOTAL_RF=8;
+var TOTAL = TOTAL_RQ + TOTAL_BQ + TOTAL_RF; // 63
 
-/* ── TRANSLATIONS ── */
-var T = {
-  en: {
-    hdrEyebrow:'Chapter 4',hdrTitle:'Personality & Career Fit',hdrSub:'RIASEC + Big Five Assessment',
-    introLead:'This test combines two validated frameworks to help you understand yourself and how your personality connects to the world of work. There are no right or wrong answers — only honest ones.',
-    p1Badge:'Part 1 · RIASEC',p1Name:'Holland Code',p1Sub:'30 questions — forced choice',
-    p2Badge:'Part 2 · Big Five',p2Name:'Personality Traits',p2Sub:'25 questions — rating scale',
-    introNote:'Estimated time: 15–20 minutes. Answer honestly — this is for you, not for anyone else.',
-    btnStart:'Begin / Comenzar →',
-    badgeR:'Part 1 · RIASEC',badgeB:'Part 2 · Big Five',
-    instructFC:'Choose the activity that appeals to you most',
-    instructLK:'Rate how much you agree with this statement',
-    likertLabels:['Strongly disagree','Disagree','Neutral','Agree','Strongly agree'],
-    rTitle:'Your Results',rSub:'Based on your 55 answers across both assessments',
-    rRiasecLabel:'RIASEC Profile',rCodeLabel:'Your Holland Code',
-    rB5Label:'Big Five Profile',
-    rCareersLabel:'Career Matches',rCareersSub:'Based on your combined profile',
-    rProfileLabel:'Your Personality Profile',
-    btnRestart:'↩ Retake test / Repetir test',
-    rNames:{R:'Realistic',I:'Investigative',A:'Artistic',S:'Social',E:'Enterprising',C:'Conventional'},
-    b5Names:{E:'Extraversion',O:'Openness',A:'Agreeableness',C:'Conscientiousness',N:'Neuroticism'},
-    of:'of'
-  },
-  es: {
-    hdrEyebrow:'Capítulo 4',hdrTitle:'Personalidad y Vocación',hdrSub:'Evaluación RIASEC + Cinco Grandes',
-    introLead:'Este test combina dos marcos validados para ayudarte a entenderte mejor y cómo tu personalidad se conecta con el mundo del trabajo. No hay respuestas correctas o incorrectas — solo respuestas honestas.',
-    p1Badge:'Parte 1 · RIASEC',p1Name:'Código de Holland',p1Sub:'30 preguntas — elección forzada',
-    p2Badge:'Parte 2 · Cinco Grandes',p2Name:'Rasgos de Personalidad',p2Sub:'25 preguntas — escala de valoración',
-    introNote:'Tiempo estimado: 15–20 minutos. Responde honestamente — esto es para ti, no para nadie más.',
-    btnStart:'Begin / Comenzar →',
-    badgeR:'Parte 1 · RIASEC',badgeB:'Parte 2 · Cinco Grandes',
-    instructFC:'Elige la actividad que más te atrae',
-    instructLK:'Califica cuánto estás de acuerdo con esta afirmación',
-    likertLabels:['Totalmente en desacuerdo','En desacuerdo','Neutral','De acuerdo','Totalmente de acuerdo'],
-    rTitle:'Tus Resultados',rSub:'Basado en tus 55 respuestas en ambas evaluaciones',
-    rRiasecLabel:'Perfil RIASEC',rCodeLabel:'Tu Código de Holland',
-    rB5Label:'Perfil de los Cinco Grandes',
-    rCareersLabel:'Carreras Compatibles',rCareersSub:'Basado en tu perfil combinado',
-    rProfileLabel:'Tu Perfil de Personalidad',
-    btnRestart:'↩ Retake test / Repetir test',
-    rNames:{R:'Realista',I:'Investigativo',A:'Artístico',S:'Social',E:'Emprendedor',C:'Convencional'},
-    b5Names:{E:'Extraversión',O:'Apertura',A:'Amabilidad',C:'Responsabilidad',N:'Neuroticismo'},
-    of:'de'
-  }
-};
-
-/* ── QUESTIONS ── */
-var RQ = [
-  {en:['Design a building or bridge','Analyze a company\'s finances'],es:['Diseñar un edificio o puente','Analizar las finanzas de una empresa'],c:['R','I']},
-  {en:['Repair a car engine','Write a short story'],es:['Reparar el motor de un auto','Escribir un cuento'],c:['R','A']},
-  {en:['Build furniture from scratch','Teach a class'],es:['Construir muebles desde cero','Dar una clase'],c:['R','S']},
-  {en:['Operate heavy machinery','Lead a sales team'],es:['Operar maquinaria pesada','Liderar un equipo de ventas'],c:['R','E']},
-  {en:['Work outdoors with animals','Follow organized procedures at a desk'],es:['Trabajar al aire libre con animales','Seguir procedimientos organizados en una oficina'],c:['R','C']},
-  {en:['Conduct a chemistry experiment','Fix electrical wiring'],es:['Realizar un experimento de química','Reparar cables eléctricos'],c:['I','R']},
-  {en:['Research a medical question','Perform in a theater play'],es:['Investigar una pregunta médica','Actuar en una obra de teatro'],c:['I','A']},
-  {en:['Study how languages evolved','Counsel someone in crisis'],es:['Estudiar cómo evolucionaron los idiomas','Aconsejar a alguien en crisis'],c:['I','S']},
-  {en:['Develop a new business strategy','Analyze scientific data'],es:['Desarrollar una nueva estrategia de negocio','Analizar datos científicos'],c:['E','I']},
-  {en:['Organize a large dataset','Run a science experiment'],es:['Organizar una gran base de datos','Realizar un experimento científico'],c:['C','I']},
-  {en:['Paint a mural','Organize inventory in a warehouse'],es:['Pintar un mural','Organizar inventario en un almacén'],c:['A','R']},
-  {en:['Compose music','Investigate a philosophical question'],es:['Componer música','Investigar una pregunta filosófica'],c:['A','I']},
-  {en:['Design a website','Volunteer at a community center'],es:['Diseñar un sitio web','Ser voluntario en un centro comunitario'],c:['A','S']},
-  {en:['Direct a film','Manage a business project'],es:['Dirigir una película','Gestionar un proyecto de negocios'],c:['A','E']},
-  {en:['Write poetry','Keep financial records'],es:['Escribir poesía','Llevar registros financieros'],c:['A','C']},
-  {en:['Mentor a younger student','Work alone on a technical problem'],es:['Orientar a un estudiante menor','Trabajar solo en un problema técnico'],c:['S','R']},
-  {en:['Counsel people through difficulties','Study biology'],es:['Ayudar a personas con dificultades','Estudiar biología'],c:['S','I']},
-  {en:['Organize a community event','Create an art installation'],es:['Organizar un evento comunitario','Crear una instalación artística'],c:['S','A']},
-  {en:['Coach a sports team','Develop a marketing plan'],es:['Entrenar a un equipo deportivo','Desarrollar un plan de marketing'],c:['S','E']},
-  {en:['Work as a social worker','Manage accounting records'],es:['Trabajar como trabajador social','Gestionar registros contables'],c:['S','C']},
-  {en:['Start your own company','Follow a strict routine at work'],es:['Iniciar tu propia empresa','Seguir una rutina estricta en el trabajo'],c:['E','C']},
-  {en:['Negotiate a business deal','Repair a machine'],es:['Negociar un trato comercial','Reparar una máquina'],c:['E','R']},
-  {en:['Run a political campaign','Analyze scientific data'],es:['Dirigir una campaña política','Analizar datos científicos'],c:['E','I']},
-  {en:['Manage a creative team','Work as a nurse or doctor'],es:['Liderar un equipo creativo','Trabajar como enfermero o médico'],c:['E','S']},
-  {en:['Give a speech to a large crowd','Organize files and records'],es:['Dar un discurso a una multitud','Organizar archivos y registros'],c:['E','C']},
-  {en:['Keep detailed financial records','Design a product'],es:['Llevar registros financieros detallados','Diseñar un producto'],c:['C','R']},
-  {en:['Manage data and spreadsheets','Research historical events'],es:['Gestionar datos y hojas de cálculo','Investigar eventos históricos'],c:['C','I']},
-  {en:['Work as a librarian or archivist','Perform on stage'],es:['Trabajar como bibliotecario o archivista','Actuar en un escenario'],c:['C','A']},
-  {en:['Follow rules and procedures carefully','Lead a team toward a goal'],es:['Seguir reglas y procedimientos cuidadosamente','Liderar un equipo hacia una meta'],c:['C','E']},
-  {en:['Audit financial reports','Help resolve a community conflict'],es:['Auditar informes financieros','Ayudar a resolver un conflicto comunitario'],c:['C','S']}
+// ── RIASEC 30 questions (balanced: 15 pairs × 2, each dim = 10) ──
+// C here = RIASEC Conventional
+var RQ=[
+{en:['Build a wooden bookshelf from scratch','Study the chemistry behind everyday reactions'],es:['Construir una estantería de madera desde cero','Estudiar las reacciones químicas de los objetos cotidianos'],c:['R','I']},
+{en:['Create a simple app or website to solve a problem you have noticed in your school or neighborhood','Install or repair the electrical wiring and equipment in a room or for a school event'],es:['Crear una aplicación o sitio web sencillo para resolver un problema que has notado en tu colegio o barrio','Instalar o reparar el cableado eléctrico y los equipos en un espacio o para un evento escolar'],c:['I','R']},
+{en:['Install electrical wiring in a new room','Write an original short story'],es:['Instalar el cableado eléctrico en una habitación','Escribir un cuento original'],c:['R','A']},
+{en:['Design the interface and user experience of a mobile app or website','Repair a broken appliance at home'],es:['Diseñar la interfaz y experiencia de usuario de una aplicación móvil o sitio web','Reparar un electrodoméstico averiado en casa'],c:['A','R']},
+{en:['Work outdoors restoring a hiking trail','Tutor younger students in math'],es:['Trabajar al aire libre restaurando un sendero de montaña','Dar clases de apoyo de matemáticas a estudiantes menores'],c:['R','S']},
+{en:['Organize activities to help new students settle in at school','Assemble a piece of furniture from technical instructions'],es:['Organizar actividades para ayudar a nuevos estudiantes a integrarse en la escuela','Armar muebles siguiendo instrucciones técnicas'],c:['S','R']},
+{en:['Operate machinery on a construction site','Pitch a business idea to a group of investors'],es:['Operar maquinaria en una obra de construcción','Presentar una idea de negocio ante un grupo de inversores'],c:['R','E']},
+{en:['Lead a team to finish a project under pressure','Repair a car engine step by step'],es:['Liderar un equipo para terminar un proyecto bajo presión','Reparar el motor de un coche paso a paso'],c:['E','R']},
+{en:['Install and configure solar panels or other renewable energy equipment','Organize and manage the official files, records, and schedules for a school or community organization'],es:['Instalar y configurar paneles solares u otros equipos de energía renovable','Organizar y gestionar los archivos, registros y cronogramas oficiales de un colegio u organización comunitaria'],c:['R','C']},
+{en:['Keep and update a detailed record of a project\'s tasks, expenses, and progress','Build a working model or prototype using 3D printing, carpentry, or other hands-on materials'],es:['Llevar y actualizar el registro detallado de las tareas, gastos y avances de un proyecto','Construir una maqueta funcional o prototipo usando impresión 3D, carpintería u otros materiales prácticos'],c:['C','R']},
+{en:['Study how human memory works','Compose an original song or melody'],es:['Estudiar cómo funciona la memoria humana','Componer una canción o melodía original'],c:['I','A']},
+{en:['Illustrate a graphic novel','Research the causes of climate change'],es:['Ilustrar una novela gráfica','Investigar las causas del cambio climático'],c:['A','I']},
+{en:['Investigate patterns in public health data','Facilitate a group support session for students'],es:['Investigar patrones en datos de salud pública','Facilitar una sesión de apoyo grupal para estudiantes'],c:['I','S']},
+{en:['Help coordinate a mental health awareness campaign','Analyze the results of a biology experiment'],es:['Ayudar a coordinar una campaña de concienciación sobre salud mental','Analizar los resultados de un experimento de biología'],c:['S','I']},
+{en:['Research market trends to support a business decision','Launch a new product line for a company'],es:['Investigar tendencias del mercado para apoyar una decisión de negocio','Lanzar una nueva línea de productos para una empresa'],c:['I','E']},
+{en:['Develop a strategy to grow a small business','Conduct a scientific investigation in a lab'],es:['Desarrollar una estrategia para hacer crecer un pequeño negocio','Realizar una investigación científica en un laboratorio'],c:['E','I']},
+{en:['Research how hackers find weaknesses in apps and websites, and how those weaknesses can be fixed','Organize and maintain the complete records, inventory, and official documentation of a school club or organization'],es:['Investigar cómo los hackers encuentran vulnerabilidades en apps y sitios web, y cómo pueden corregirse','Organizar y mantener los registros completos, el inventario y la documentación oficial de un club u organización escolar'],c:['I','C']},
+{en:['Keep and update a detailed spreadsheet with the budget, expenses, and results of a school project','Investigate a trend that interests you by collecting real information and looking for patterns that explain it'],es:['Llevar y actualizar una hoja de cálculo con el presupuesto, gastos y resultados de un proyecto escolar','Investigar una tendencia que te genera curiosidad recopilando información real y buscando los patrones que la explican'],c:['C','I']},
+{en:['Design the visual identity for a community festival','Guide students who are struggling with academic stress'],es:['Diseñar la identidad visual de un festival comunitario','Orientar a estudiantes que enfrentan estrés académico'],c:['A','S']},
+{en:['Coordinate a volunteer program for elderly residents','Create illustrations for a children\'s book'],es:['Coordinar un programa de voluntariado para personas mayores','Crear ilustraciones para un libro infantil'],c:['S','A']},
+{en:['Direct and produce a short documentary film','Negotiate a sponsorship deal for a local event'],es:['Dirigir y producir un cortometraje documental','Negociar un acuerdo de patrocinio para un evento local'],c:['A','E']},
+{en:['Develop a brand identity and marketing campaign','Design a mural for a public space'],es:['Desarrollar la identidad de marca y campaña de marketing de un producto','Diseñar un mural para un espacio público'],c:['E','A']},
+{en:['Write a screenplay for a theater production','Review and edit documents for errors and clarity'],es:['Escribir el guion de una obra de teatro','Revisar y corregir documentos en busca de errores'],c:['A','C']},
+{en:['Organize and catalog a museum\'s collection','Photograph and curate images for an exhibition'],es:['Organizar y catalogar la colección de un museo','Fotografiar y curar imágenes para una exposición'],c:['C','A']},
+{en:['Run workshops for young people in a community center','Lead a fundraising campaign for a local cause'],es:['Coordinar talleres para jóvenes en un centro comunitario','Liderar una campaña de recaudación de fondos para una causa local'],c:['S','E']},
+{en:['Manage and motivate a team of volunteers','Support families navigating a community health challenge'],es:['Gestionar y motivar a un equipo de voluntarios','Apoyar a familias que atraviesan una situación de salud comunitaria'],c:['E','S']},
+{en:['Teach conflict-resolution skills to a group of students','Process and manage administrative records for a school'],es:['Enseñar habilidades de resolución de conflictos a estudiantes','Procesar y gestionar los registros administrativos de una escuela'],c:['S','C']},
+{en:['Organize the schedule and paperwork for a school club','Coordinate a buddy system for students new to your school'],es:['Organizar el calendario y los registros de un club escolar','Coordinar un sistema de acompañamiento para estudiantes nuevos en tu colegio'],c:['C','S']},
+{en:['Develop and present a startup business plan','Follow established accounting procedures to prepare financial reports'],es:['Desarrollar y presentar un plan de negocio para una startup','Seguir procedimientos contables establecidos para preparar informes financieros'],c:['E','C']},
+{en:['Keep track of expenses and organize the records for a school event','Create and pitch a plan to promote a product or event at school'],es:['Llevar el registro de gastos y organizar los documentos de un evento escolar','Crear y presentar un plan para promocionar un producto o evento en el colegio'],c:['C','E']}
 ];
 
-var BQ = [
-  {en:'I enjoy being the center of attention at social events.',es:'Disfruto ser el centro de atención en eventos sociales.',t:'E',r:false},
-  {en:'I feel energized after spending time with large groups of people.',es:'Me siento con energía después de estar con grupos grandes de personas.',t:'E',r:false},
-  {en:'I prefer quiet evenings at home over busy social gatherings.',es:'Prefiero noches tranquilas en casa antes que reuniones sociales animadas.',t:'E',r:true},
-  {en:'I talk to many different people at parties.',es:'Hablo con muchas personas diferentes en las fiestas.',t:'E',r:false},
-  {en:'I keep in the background in social situations.',es:'Me mantengo en segundo plano en situaciones sociales.',t:'E',r:true},
-  {en:'I am interested in abstract ideas and theoretical concepts.',es:'Me interesan las ideas abstractas y los conceptos teóricos.',t:'O',r:false},
-  {en:'I enjoy exploring creative and artistic experiences.',es:'Disfruto explorar experiencias creativas y artísticas.',t:'O',r:false},
-  {en:'I prefer routine and predictable experiences over novelty.',es:'Prefiero la rutina y las experiencias predecibles antes que la novedad.',t:'O',r:true},
-  {en:'I like to think about complex problems and ideas.',es:'Me gusta reflexionar sobre problemas e ideas complejas.',t:'O',r:false},
-  {en:'I am not interested in philosophical discussions.',es:'No me interesan las discusiones filosóficas.',t:'O',r:true},
-  {en:'I feel concerned for others\' wellbeing.',es:'Me preocupo por el bienestar de los demás.',t:'A',r:false},
-  {en:'I try to be kind and considerate toward everyone I meet.',es:'Trato de ser amable y considerado con todos los que conozco.',t:'A',r:false},
-  {en:'I can be critical of others and point out their faults.',es:'Puedo ser crítico con los demás y señalar sus defectos.',t:'A',r:true},
-  {en:'I believe most people have good intentions.',es:'Creo que la mayoría de las personas tienen buenas intenciones.',t:'A',r:false},
-  {en:'I like to cooperate with others rather than compete.',es:'Prefiero cooperar con los demás antes que competir.',t:'A',r:false},
-  {en:'I make plans and stick to them.',es:'Hago planes y me atengo a ellos.',t:'C',r:false},
-  {en:'I pay attention to details and avoid making mistakes.',es:'Presto atención a los detalles y evito cometer errores.',t:'C',r:false},
-  {en:'I often leave tasks unfinished.',es:'Con frecuencia dejo tareas sin terminar.',t:'C',r:true},
-  {en:'I work hard and push myself to excel.',es:'Trabajo duro y me esfuerzo por sobresalir.',t:'C',r:false},
-  {en:'I have difficulty starting tasks even when I need to.',es:'Tengo dificultad para comenzar tareas incluso cuando debo hacerlo.',t:'C',r:true},
-  {en:'I remain calm in stressful situations.',es:'Me mantengo tranquilo en situaciones de estrés.',t:'N',r:true},
-  {en:'I often worry about things that might go wrong.',es:'Con frecuencia me preocupo por cosas que podrían salir mal.',t:'N',r:false},
-  {en:'I experience mood swings throughout the day.',es:'Experimento cambios de humor a lo largo del día.',t:'N',r:false},
-  {en:'I rarely feel sad or emotionally down.',es:'Rara vez me siento triste o emocionalmente bajo.',t:'N',r:true},
-  {en:'I feel anxious when facing uncertain or new situations.',es:'Me siento ansioso cuando enfrento situaciones inciertas o nuevas.',t:'N',r:false}
+// ── BIG FIVE 25 questions ──
+// C here = Conscientiousness (NOT RIASEC Conventional)
+var BQ=[
+{en:'When I am in a group, I often end up leading conversations or suggesting what to do.',es:'Cuando estoy en un grupo, suelo terminar liderando las conversaciones o sugiriendo qué hacer.',t:'E',r:false},
+{en:'I feel energized after spending time with large groups of people.',es:'Me siento con energía después de pasar tiempo con grupos grandes de personas.',t:'E',r:false},
+{en:'I prefer quiet evenings at home over busy social gatherings.',es:'Prefiero noches tranquilas en casa antes que reuniones sociales animadas.',t:'E',r:true},
+{en:'At social events, I find it easy to start conversations with people I have never met.',es:'En eventos sociales, me resulta fácil iniciar conversaciones con personas que no conozco.',t:'E',r:false},
+{en:'In most social situations, I prefer to let others take center stage.',es:'En la mayoría de situaciones sociales, prefiero dejar que otros sean el centro de atención.',t:'E',r:true},
+{en:'I enjoy exploring ideas that have no immediate practical use — just for the pleasure of understanding them.',es:'Disfruto explorando ideas sin aplicación práctica inmediata — solo por el placer de entenderlas.',t:'O',r:false},
+{en:'I enjoy exploring creative and artistic experiences.',es:'Disfruto explorar experiencias creativas y artísticas.',t:'O',r:false},
+{en:'I prefer routine and predictable experiences over novelty.',es:'Prefiero la rutina y las experiencias predecibles antes que la novedad.',t:'O',r:true},
+{en:'I am drawn to complex problems that do not have obvious answers.',es:'Me atraen los problemas complejos que no tienen respuestas obvias.',t:'O',r:false},
+{en:'I am not interested in philosophical discussions.',es:'No me interesan las discusiones filosóficas.',t:'O',r:true},
+{en:'When someone around me is struggling, I naturally want to step in and help.',es:'Cuando alguien a mi alrededor está pasando por algo difícil, naturalmente quiero ayudar.',t:'A',r:false},
+{en:'I try to be kind and considerate toward everyone I meet.',es:'Trato de ser amable y considerado/a con todos los que conozco.',t:'A',r:false},
+{en:'I can be critical of others and point out their faults.',es:'Puedo ser crítico/a con los demás y señalar sus defectos.',t:'A',r:true},
+{en:'I believe most people have good intentions.',es:'Creo que la mayoría de las personas tienen buenas intenciones.',t:'A',r:false},
+{en:'I like to cooperate with others rather than compete.',es:'Prefiero cooperar con los demás antes que competir.',t:'A',r:false},
+{en:'Once I commit to something, I follow through even when it becomes difficult.',es:'Una vez que me comprometo con algo, lo llevo hasta el final aunque se vuelva difícil.',t:'C',r:false},
+{en:'I pay attention to details and avoid making mistakes.',es:'Presto atención a los detalles y evito cometer errores.',t:'C',r:false},
+{en:'I often leave tasks unfinished.',es:'Con frecuencia dejo tareas sin terminar.',t:'C',r:true},
+{en:'I set high standards for myself and feel uncomfortable when I deliver less than my best.',es:'Me exijo altos estándares y me siento incómodo/a cuando entrego menos de lo mejor que puedo.',t:'C',r:false},
+{en:'I have difficulty starting tasks even when I need to.',es:'Tengo dificultad para comenzar tareas incluso cuando debo hacerlo.',t:'C',r:true},
+{en:'In high-pressure situations, I manage to keep my emotions under control.',es:'En situaciones de mucha presión, logro mantener mis emociones bajo control.',t:'N',r:true},
+{en:'Before important events, my mind tends to run through all the things that could go wrong.',es:'Antes de eventos importantes, mi mente tiende a imaginar todo lo que podría salir mal.',t:'N',r:false},
+{en:'I experience mood swings throughout the day.',es:'Experimento cambios de humor a lo largo del día.',t:'N',r:false},
+{en:'I rarely feel sad or emotionally down.',es:'Rara vez me siento triste o emocionalmente bajo/a.',t:'N',r:true},
+{en:'I feel anxious when facing uncertain or new situations.',es:'Me siento ansioso/a cuando enfrento situaciones inciertas o nuevas.',t:'N',r:false}
 ];
 
-/* ── CAREER MAP ── */
-var CM = {
-  en:{
-    RI:['Engineering','Architecture','Environmental Science','Surveying','Aviation'],
-    IR:['Engineering','Architecture','Environmental Science','Surveying','Aviation'],
-    IA:['Scientific Research','Data Science','Medicine','Psychology','Philosophy'],
-    AI:['Scientific Research','Data Science','Medicine','Psychology','Philosophy'],
-    IS:['Healthcare','Counseling','Sociology','Education Research','Anthropology'],
-    SI:['Healthcare','Counseling','Sociology','Education Research','Anthropology'],
-    IE:['Entrepreneurship','Management Consulting','Law','Economics','Finance'],
-    EI:['Entrepreneurship','Management Consulting','Law','Economics','Finance'],
-    IC:['Accounting','Statistics','Computer Science','Financial Analysis','Pharmacy'],
-    CI:['Accounting','Statistics','Computer Science','Financial Analysis','Pharmacy'],
-    AS:['Arts Education','Art Therapy','Social Media','Journalism','Drama Therapy'],
-    SA:['Arts Education','Art Therapy','Social Media','Journalism','Drama Therapy'],
-    AE:['Advertising','Film','Graphic Design','Fashion','Brand Strategy'],
-    EA:['Advertising','Film','Graphic Design','Fashion','Brand Strategy'],
-    SE:['Human Resources','Public Relations','Politics','Social Work','NGO Leadership'],
-    ES:['Human Resources','Public Relations','Politics','Social Work','NGO Leadership'],
-    EC:['Business Management','Real Estate','Banking','Law','Project Management'],
-    CE:['Business Management','Real Estate','Banking','Law','Project Management'],
-    RA:['Product Design','Industrial Design','Craft','Photography','Animation'],
-    AR:['Product Design','Industrial Design','Craft','Photography','Animation'],
-    RS:['Physical Therapy','Sports Coaching','Outdoor Education','Emergency Services','Veterinary'],
-    SR:['Physical Therapy','Sports Coaching','Outdoor Education','Emergency Services','Veterinary'],
-    RE:['Construction','Civil Engineering','Operations','Manufacturing','Transportation'],
-    ER:['Construction','Civil Engineering','Operations','Manufacturing','Transportation'],
-    RC:['Quality Control','Lab Technology','Mechanical Engineering','Logistics','Agronomy'],
-    CR:['Quality Control','Lab Technology','Mechanical Engineering','Logistics','Agronomy'],
-    AC:['Publishing','Library Science','Music Production','Technical Writing','UX Design'],
-    CA:['Publishing','Library Science','Music Production','Technical Writing','UX Design'],
-    SC:['Public Administration','Education','Healthcare Administration','Social Policy','Community Development'],
-    CS:['Public Administration','Education','Healthcare Administration','Social Policy','Community Development'],
-    DEFAULT:['Education','Healthcare','Business','Technology','Arts & Culture']
-  },
-  es:{
-    RI:['Ingeniería','Arquitectura','Ciencias Ambientales','Topografía','Aviación'],
-    IR:['Ingeniería','Arquitectura','Ciencias Ambientales','Topografía','Aviación'],
-    IA:['Investigación Científica','Ciencia de Datos','Medicina','Psicología','Filosofía'],
-    AI:['Investigación Científica','Ciencia de Datos','Medicina','Psicología','Filosofía'],
-    IS:['Salud','Consejería','Sociología','Investigación Educativa','Antropología'],
-    SI:['Salud','Consejería','Sociología','Investigación Educativa','Antropología'],
-    IE:['Emprendimiento','Consultoría','Derecho','Economía','Finanzas'],
-    EI:['Emprendimiento','Consultoría','Derecho','Economía','Finanzas'],
-    IC:['Contabilidad','Estadística','Informática','Análisis Financiero','Farmacia'],
-    CI:['Contabilidad','Estadística','Informática','Análisis Financiero','Farmacia'],
-    AS:['Enseñanza de Artes','Terapia Artística','Redes Sociales','Periodismo','Dramaterapia'],
-    SA:['Enseñanza de Artes','Terapia Artística','Redes Sociales','Periodismo','Dramaterapia'],
-    AE:['Publicidad','Cine','Diseño Gráfico','Moda','Estrategia de Marca'],
-    EA:['Publicidad','Cine','Diseño Gráfico','Moda','Estrategia de Marca'],
-    SE:['Recursos Humanos','Relaciones Públicas','Política','Trabajo Social','Liderazgo en ONGs'],
-    ES:['Recursos Humanos','Relaciones Públicas','Política','Trabajo Social','Liderazgo en ONGs'],
-    EC:['Gestión Empresarial','Bienes Raíces','Banca','Derecho','Gestión de Proyectos'],
-    CE:['Gestión Empresarial','Bienes Raíces','Banca','Derecho','Gestión de Proyectos'],
-    RA:['Diseño de Producto','Diseño Industrial','Artesanía','Fotografía','Animación'],
-    AR:['Diseño de Producto','Diseño Industrial','Artesanía','Fotografía','Animación'],
-    RS:['Fisioterapia','Entrenamiento Deportivo','Educación al Aire Libre','Servicios de Emergencia','Veterinaria'],
-    SR:['Fisioterapia','Entrenamiento Deportivo','Educación al Aire Libre','Servicios de Emergencia','Veterinaria'],
-    RE:['Construcción','Ingeniería Civil','Operaciones','Manufactura','Transporte'],
-    ER:['Construcción','Ingeniería Civil','Operaciones','Manufactura','Transporte'],
-    RC:['Control de Calidad','Tecnología de Laboratorio','Ingeniería Mecánica','Logística','Agronomía'],
-    CR:['Control de Calidad','Tecnología de Laboratorio','Ingeniería Mecánica','Logística','Agronomía'],
-    AC:['Editoriales','Bibliotecología','Producción Musical','Redacción Técnica','Diseño UX'],
-    CA:['Editoriales','Bibliotecología','Producción Musical','Redacción Técnica','Diseño UX'],
-    SC:['Administración Pública','Educación','Administración de Salud','Política Social','Desarrollo Comunitario'],
-    CS:['Administración Pública','Educación','Administración de Salud','Política Social','Desarrollo Comunitario'],
-    DEFAULT:['Educación','Salud','Negocios','Tecnología','Artes y Cultura']
-  }
+// ── REFINEMENT 8 questions ──
+// Each has a question text and two options A/B
+var RFQ=[
+{
+  en_q:'When you imagine helping someone who is struggling, what appeals to you more?',
+  es_q:'Cuando imaginas ayudar a alguien que está pasando por algo difícil, ¿qué te atrae más?',
+  en:['Being present with them — listening, supporting, and helping them process what they are going through',
+      'Finding the medical or scientific solution that will improve their physical health or condition'],
+  es:['Estar presente con esa persona — escuchar, acompañar y ayudarle a procesar lo que está viviendo',
+      'Encontrar la solución médica o científica que mejore su salud física o condición']
+},
+{
+  en_q:'When you imagine analyzing something complex, which interests you more?',
+  es_q:'Cuando imaginas analizar algo complejo, ¿cuál te interesa más?',
+  en:['Understanding how living things work — the body, diseases, ecosystems, genetics',
+      'Understanding how systems and data work — algorithms, patterns, information, code'],
+  es:['Entender cómo funcionan los seres vivos — el cuerpo, las enfermedades, los ecosistemas, la genética',
+      'Entender cómo funcionan los sistemas y los datos — algoritmos, patrones, información, código']
+},
+{
+  en_q:'When you create something, what matters most to you?',
+  es_q:'Cuando creas algo, ¿qué es lo que más te importa?',
+  en:['The visual impact — how it looks, the design, the aesthetics, the visual experience',
+      'The story it tells — the message, the narrative, what it communicates'],
+  es:['El impacto visual — cómo se ve, el diseño, la estética, la experiencia visual',
+      'La historia que cuenta — el mensaje, la narrativa, lo que comunica']
+},
+{
+  en_q:'When you think about building or fixing things, which excites you more?',
+  es_q:'Cuando piensas en construir o reparar cosas, ¿cuál te genera más entusiasmo?',
+  en:['Energy systems — electrical circuits, electronic devices, renewable energy technology',
+      'Physical structures — buildings, bridges, machines, engines, infrastructure'],
+  es:['Sistemas de energía — circuitos eléctricos, dispositivos electrónicos, tecnología de energía renovable',
+      'Estructuras físicas — edificios, puentes, máquinas, motores, infraestructura']
+},
+{
+  en_q:'When you imagine leading or influencing others, which appeals to you more?',
+  es_q:'Cuando imaginas liderar o influir en otros, ¿cuál te atrae más?',
+  en:['Building something — launching a business, a project, or a product from scratch',
+      'Shaping decisions — using argument, law, or public communication to change how things work'],
+  es:['Construir algo — lanzar un negocio, un proyecto o un producto desde cero',
+      'Incidir en las decisiones — usando el argumento, la ley o la comunicación pública para cambiar cómo funcionan las cosas']
+},
+{
+  en_q:'Within technology, which role interests you more?',
+  es_q:'Dentro de la tecnología, ¿cuál rol te interesa más?',
+  en:['Creating — designing and building apps, software, or digital tools that people use',
+      'Protecting — identifying threats and making systems and data safe from attacks'],
+  es:['Crear — diseñar y construir aplicaciones, software o herramientas digitales que las personas usen',
+      'Proteger — identificar amenazas y hacer que los sistemas y los datos estén seguros']
+},
+{
+  en_q:'Within science, which area draws you more?',
+  es_q:'Dentro de la ciencia, ¿cuál área te atrae más?',
+  en:['Life and health sciences — how the body works, diseases, mental health, biology, genetics',
+      'Exact sciences and engineering — physics, chemistry, materials, structures, calculations'],
+  es:['Ciencias de la vida y la salud — cómo funciona el cuerpo, enfermedades, salud mental, biología, genética',
+      'Ciencias exactas e ingeniería — física, química, materiales, estructuras, cálculos']
+},
+{
+  en_q:'In a structured, organized work environment, which type of work interests you most?',
+  es_q:'En un entorno de trabajo estructurado y organizado, ¿qué tipo de trabajo te interesa más?',
+  en:['Numbers and financial systems — budgets, accounts, audits, making sure everything adds up',
+      'People, processes, and information — managing how an organization runs and making it more efficient'],
+  es:['Números y sistemas financieros — presupuestos, cuentas, auditorías, verificar que todo cuadre',
+      'Personas, procesos e información — gestionar cómo funciona una organización y hacerla más eficiente']
+}
+];
+
+// ── TRANSLATIONS ──
+var T={
+en:{
+  hdrEyebrow:'Chapter 4',hdrTitle:'Vocational & Personality Exploration Test',hdrSub:'Based on the RIASEC and Big Five models',
+  introLead:'This exploration tool combines two widely used models to support self-understanding and career exploration: the RIASEC model of vocational interests and the Big Five personality model. There are no right or wrong answers — only honest ones.',
+  p1Badge:'Part 1 · RIASEC',p1Name:'Vocational Interests',p1Sub:'30 questions',
+  p2Badge:'Part 2 · Big Five',p2Name:'Personality Traits',p2Sub:'25 questions',
+  p3Badge:'Part 3 · Refine',p3Name:'Profile Refinement',p3Sub:'8 questions',
+  introNote:'Estimated time: 20–25 minutes. Answer honestly — this is for you, not for anyone else.',
+  btnStart:'Begin / Comenzar →',
+  badgeR:'Part 1 · RIASEC',badgeB:'Part 2 · Big Five',badgeRF:'Part 3 · Refine',
+  instructFC:'Choose the activity that appeals to you most',
+  instructLK:'Rate how much you agree with this statement',
+  instructRF:'Within your areas of interest, choose the option that appeals to you more',
+  refineIntro:'Almost done! These last 8 questions help refine your career suggestions based on your specific interests within each area.',
+  likertLabels:['Strongly disagree','Disagree','Neutral','Agree','Strongly agree'],
+  rTitle:'Your Results',rSub:'Based on your 63 answers',
+  rDisclaimer:'These results are for self-reflection and career exploration only. They do not constitute a psychological diagnosis and do not replace a professional evaluation.',
+  rRiasecLabel:'RIASEC Profile — Vocational Interests',rCodeLabel:'Your Holland Code',
+  rB5Label:'Big Five — Personality Traits',
+  rCareersLabel:'Areas Worth Exploring',rCareersSub:'Based on your RIASEC profile',
+  rRefinedLabel:'Your Profile May Specifically Point Toward',rRefinedSub:'Based on your refinement answers',
+  rProfileLabel:'Your Exploration Profile',btnRestart:'↩ Retake / Repetir',
+  rNames:{R:'Realistic',I:'Investigative',A:'Artistic',S:'Social',E:'Enterprising',C:'Conventional'},
+  b5Names:{E:'Extraversion',O:'Openness',A:'Agreeableness',C:'Conscientiousness',N:'Neuroticism'},
+  catVeryLow:'Very Low',catLow:'Low',catMod:'Moderate',catHigh:'High',catVeryHigh:'Very High',of:'of'
+},
+es:{
+  hdrEyebrow:'Capítulo 4',hdrTitle:'Test de Exploración Vocacional y Personalidad',hdrSub:'Basado en los modelos RIASEC y Big Five',
+  introLead:'Esta herramienta de exploración combina dos modelos ampliamente utilizados para favorecer el autoconocimiento y la orientación vocacional: el modelo RIASEC de intereses profesionales y el modelo de personalidad de los Cinco Grandes (Big Five). No hay respuestas correctas o incorrectas — solo respuestas honestas.',
+  p1Badge:'Parte 1 · RIASEC',p1Name:'Intereses Vocacionales',p1Sub:'30 preguntas',
+  p2Badge:'Parte 2 · Cinco Grandes',p2Name:'Rasgos de Personalidad',p2Sub:'25 preguntas',
+  p3Badge:'Parte 3 · Refinar',p3Name:'Refinamiento de Perfil',p3Sub:'8 preguntas',
+  introNote:'Tiempo estimado: 20–25 minutos. Responde honestamente — esto es para ti, no para nadie más.',
+  btnStart:'Begin / Comenzar →',
+  badgeR:'Parte 1 · RIASEC',badgeB:'Parte 2 · Cinco Grandes',badgeRF:'Parte 3 · Refinar',
+  instructFC:'Elige la actividad que más te atrae',
+  instructLK:'Califica cuánto estás de acuerdo con esta afirmación',
+  instructRF:'Dentro de tus áreas de interés, elige la opción que más te atrae',
+  refineIntro:'¡Ya casi terminas! Estas últimas 8 preguntas ayudan a refinar las sugerencias de carrera según tus intereses específicos dentro de cada área.',
+  likertLabels:['Totalmente en desacuerdo','En desacuerdo','Neutral','De acuerdo','Totalmente de acuerdo'],
+  rTitle:'Tus Resultados',rSub:'Basado en tus 63 respuestas',
+  rDisclaimer:'Estos resultados tienen un propósito orientativo y de autoconocimiento. No constituyen un diagnóstico psicológico ni sustituyen una evaluación profesional.',
+  rRiasecLabel:'Perfil RIASEC — Intereses Vocacionales',rCodeLabel:'Tu Código de Holland',
+  rB5Label:'Cinco Grandes — Rasgos de Personalidad',
+  rCareersLabel:'Áreas que Vale la Pena Explorar',rCareersSub:'Basado en tu perfil RIASEC',
+  rRefinedLabel:'Tu Perfil Puede Apuntar Específicamente Hacia',rRefinedSub:'Basado en tus respuestas de refinamiento',
+  rProfileLabel:'Tu Perfil de Exploración',btnRestart:'↩ Retake / Repetir',
+  rNames:{R:'Realista',I:'Investigativo',A:'Artístico',S:'Social',E:'Emprendedor',C:'Convencional'},
+  b5Names:{E:'Extraversión',O:'Apertura',A:'Amabilidad',C:'Responsabilidad',N:'Neuroticismo'},
+  catVeryLow:'Muy bajo',catLow:'Bajo',catMod:'Medio',catHigh:'Alto',catVeryHigh:'Muy alto',of:'de'
+}};
+
+// ── RIASEC DESCRIPTIONS ──
+var RDESC={
+en:{R:'Your result suggests a practical, hands-on orientation. You may enjoy working with tools, technology, machines, or the natural world — environments where results are visible and concrete.',I:'Your result suggests an investigative orientation. You may be drawn to research, analysis, data, and intellectual problem-solving — environments that reward curiosity and systematic thinking.',A:'Your result suggests a creative and expressive orientation. You may tend toward originality and imagination, and may find satisfaction in work that leaves room for personal expression.',S:'Your result suggests a social orientation. You may find satisfaction in helping others grow, working as part of a team, or supporting people through challenges.',E:'Your result suggests an enterprising orientation. You may be drawn to leadership, influence, and making things happen — environments where initiative and persuasion matter.',C:'Your result suggests a conventional orientation. You may work well in structured environments that value order, accuracy, and consistency.'},
+es:{R:'Tu resultado sugiere una orientación práctica y manual. Es probable que disfrutes trabajando con herramientas, tecnología, maquinaria o el mundo natural — entornos donde los resultados son visibles y concretos.',I:'Tu resultado sugiere una orientación investigativa. Puede que te atraiga la investigación, el análisis, los datos y la resolución de problemas intelectuales — entornos que recompensan la curiosidad y el pensamiento sistemático.',A:'Tu resultado sugiere una orientación creativa y expresiva. Es probable que tiendas hacia la originalidad y la imaginación, y que encuentres satisfacción en un trabajo que deja espacio para la expresión personal.',S:'Tu resultado sugiere una orientación social. Es posible que encuentres satisfacción en ayudar a otros a crecer, trabajar en equipo o apoyar a personas en momentos difíciles.',E:'Tu resultado sugiere una orientación emprendedora. Puede que te atraiga el liderazgo, la influencia y hacer que las cosas sucedan — entornos donde la iniciativa y la persuasión son importantes.',C:'Tu resultado sugiere una orientación convencional. Es probable que trabajes bien en entornos estructurados que valoran el orden, la precisión y la consistencia.'}};
+
+// ── BIG FIVE DESCRIPTIONS ──
+var B5DESC={
+en:{Ehi:'Your result suggests a tendency toward extraversion. You may feel energized by social interaction and tend to seek out group environments and collaborative work.',Elo:'Your result suggests a tendency toward introversion. You may feel most comfortable working independently or in small, focused groups, and recharge through time alone.',Ohi:'Your result suggests a strong openness to new experiences and ideas. You may be drawn to creative, intellectually stimulating environments and enjoy exploring unconventional approaches.',Olo:'Your result suggests a preference for familiar, structured environments. You may work best with clear guidelines and proven approaches rather than open-ended or abstract tasks.',Ahi:'Your result suggests a tendency toward cooperation and empathy. You may find satisfaction in roles that involve helping others or working closely with people toward shared goals.',Alo:'Your result suggests a more direct and independent approach. You may be comfortable expressing disagreement and tend to prioritize results over maintaining group harmony.',Chi:'Your result suggests a tendency toward conscientiousness. You may tend to be organized, goal-oriented, and reliable in following through on commitments.',Clo:'Your result suggests a more flexible and spontaneous approach. You may work well in environments that require adaptation and improvisation rather than strict routines.',Nhi:'Your result suggests a higher sensitivity to stress and emotional ups and downs. Building consistent routines and coping strategies may help you navigate demanding situations.',Nlo:'Your result suggests emotional stability. You may tend to remain calm under pressure, which can be a real strength in challenging or high-stakes environments.'},
+es:{Ehi:'Tu resultado sugiere una tendencia hacia la extraversión. Es posible que te sientas con energía en situaciones sociales y busques entornos de grupo y trabajo colaborativo.',Elo:'Tu resultado sugiere una tendencia hacia la introversión. Puede que te sientas más cómodo/a trabajando de forma independiente o en grupos pequeños, y recargues energía en soledad.',Ohi:'Tu resultado sugiere una marcada apertura a nuevas ideas y experiencias. Es probable que te atraigan entornos creativos e intelectualmente estimulantes y que disfrutes explorando enfoques poco convencionales.',Olo:'Tu resultado sugiere una preferencia por entornos familiares y estructurados. Puede que trabajes mejor con pautas claras y enfoques conocidos que con tareas abiertas o abstractas.',Ahi:'Tu resultado sugiere una tendencia hacia la cooperación y la empatía. Es probable que encuentres satisfacción en roles que impliquen ayudar a otros o trabajar junto a personas hacia objetivos comunes.',Alo:'Tu resultado sugiere un enfoque más directo e independiente. Puede que te sientas cómodo/a expresando desacuerdo y tiendas a priorizar los resultados sobre la armonía del grupo.',Chi:'Tu resultado sugiere una tendencia hacia la responsabilidad. Es probable que tiendas a ser organizado/a, orientado/a a objetivos y fiable a la hora de cumplir compromisos.',Clo:'Tu resultado sugiere un enfoque más flexible y espontáneo. Puede que te desenvuelvas bien en entornos que requieren adaptación e improvisación en lugar de rutinas estrictas.',Nhi:'Tu resultado sugiere una mayor sensibilidad al estrés y los altibajos emocionales. Desarrollar rutinas sólidas y estrategias de afrontamiento puede ayudarte a gestionar situaciones exigentes.',Nlo:'Tu resultado sugiere estabilidad emocional. Es probable que tiendas a mantener la calma bajo presión, lo que puede ser una fortaleza real en entornos desafiantes o de alta exigencia.'}};
+
+// ── BASE CAREER MAP ──
+var CM={
+en:{
+  RI:['Electrical Engineering','Medicine','Dentistry','Architecture','Systems Engineering'],IR:['Electrical Engineering','Medicine','Dentistry','Architecture','Systems Engineering'],
+  IA:['Medicine','Scientific Research','Data Science','Psychology','Biomedical Research'],AI:['Medicine','Scientific Research','Data Science','Psychology','Biomedical Research'],
+  IS:['Medicine','Nursing','Dentistry','Counseling','Social Work'],SI:['Medicine','Nursing','Dentistry','Counseling','Social Work'],
+  IE:['Law','Entrepreneurship','Economics','Consulting','Finance'],EI:['Law','Entrepreneurship','Economics','Consulting','Finance'],
+  IC:['Software Engineering','Computer Science','Pharmacy','Statistics','Accounting'],CI:['Software Engineering','Computer Science','Pharmacy','Statistics','Accounting'],
+  AS:['Arts Education','Journalism','Art Therapy','Social Media','Drama Therapy'],SA:['Arts Education','Journalism','Art Therapy','Social Media','Drama Therapy'],
+  AE:['Advertising','Film','Graphic Design','Fashion','Brand Strategy'],EA:['Advertising','Film','Graphic Design','Fashion','Brand Strategy'],
+  SE:['Political Science','Human Resources','Public Relations','Social Work','NGO Leadership'],ES:['Political Science','Human Resources','Public Relations','Social Work','NGO Leadership'],
+  EC:['Business Administration','Law','Banking','Project Management','Real Estate'],CE:['Business Administration','Law','Banking','Project Management','Real Estate'],
+  RA:['Architecture','Product Design','Industrial Design','UX Design','Animation'],AR:['Architecture','Product Design','Industrial Design','UX Design','Animation'],
+  RS:['Nursing','Dentistry','Physical Therapy','Emergency Services','Veterinary Medicine'],SR:['Nursing','Dentistry','Physical Therapy','Emergency Services','Veterinary Medicine'],
+  RE:['Civil Engineering','Construction','Mechanical Engineering','Manufacturing','Transportation'],ER:['Civil Engineering','Construction','Mechanical Engineering','Manufacturing','Transportation'],
+  RC:['Electrical Engineering','Mechanical Engineering','Lab Technology','Quality Control','Logistics'],CR:['Electrical Engineering','Mechanical Engineering','Lab Technology','Quality Control','Logistics'],
+  AC:['UX Design','Publishing','Music Production','Technical Writing','Library Science'],CA:['UX Design','Publishing','Music Production','Technical Writing','Library Science'],
+  SC:['Nursing','Public Administration','Education','Healthcare Administration','Social Policy'],CS:['Nursing','Public Administration','Education','Healthcare Administration','Social Policy'],
+  DEFAULT:['Education','Healthcare','Business','Technology','Arts & Culture']
+},
+es:{
+  RI:['Ingeniería Eléctrica','Medicina','Odontología','Arquitectura','Ingeniería de Sistemas'],IR:['Ingeniería Eléctrica','Medicina','Odontología','Arquitectura','Ingeniería de Sistemas'],
+  IA:['Medicina','Investigación Científica','Ciencia de Datos','Psicología','Investigación Biomédica'],AI:['Medicina','Investigación Científica','Ciencia de Datos','Psicología','Investigación Biomédica'],
+  IS:['Medicina','Enfermería','Odontología','Consejería','Trabajo Social'],SI:['Medicina','Enfermería','Odontología','Consejería','Trabajo Social'],
+  IE:['Derecho','Emprendimiento','Economía','Consultoría','Finanzas'],EI:['Derecho','Emprendimiento','Economía','Consultoría','Finanzas'],
+  IC:['Ingeniería de Software','Informática','Farmacia','Estadística','Contabilidad'],CI:['Ingeniería de Software','Informática','Farmacia','Estadística','Contabilidad'],
+  AS:['Educación Artística','Periodismo','Terapia Artística','Redes Sociales','Dramaterapia'],SA:['Educación Artística','Periodismo','Terapia Artística','Redes Sociales','Dramaterapia'],
+  AE:['Publicidad','Cine','Diseño Gráfico','Moda','Estrategia de Marca'],EA:['Publicidad','Cine','Diseño Gráfico','Moda','Estrategia de Marca'],
+  SE:['Ciencias Políticas','Recursos Humanos','Relaciones Públicas','Trabajo Social','Liderazgo en ONGs'],ES:['Ciencias Políticas','Recursos Humanos','Relaciones Públicas','Trabajo Social','Liderazgo en ONGs'],
+  EC:['Administración de Empresas','Derecho','Banca','Gestión de Proyectos','Bienes Raíces'],CE:['Administración de Empresas','Derecho','Banca','Gestión de Proyectos','Bienes Raíces'],
+  RA:['Arquitectura','Diseño de Producto','Diseño Industrial','Diseño UX','Animación'],AR:['Arquitectura','Diseño de Producto','Diseño Industrial','Diseño UX','Animación'],
+  RS:['Enfermería','Odontología','Fisioterapia','Servicios de Emergencia','Medicina Veterinaria'],SR:['Enfermería','Odontología','Fisioterapia','Servicios de Emergencia','Medicina Veterinaria'],
+  RE:['Ingeniería Civil','Construcción','Ingeniería Mecánica','Manufactura','Transporte'],ER:['Ingeniería Civil','Construcción','Ingeniería Mecánica','Manufactura','Transporte'],
+  RC:['Ingeniería Eléctrica','Ingeniería Mecánica','Tecnología de Laboratorio','Control de Calidad','Logística'],CR:['Ingeniería Eléctrica','Ingeniería Mecánica','Tecnología de Laboratorio','Control de Calidad','Logística'],
+  AC:['Diseño UX','Editoriales','Producción Musical','Redacción Técnica','Bibliotecología'],CA:['Diseño UX','Editoriales','Producción Musical','Redacción Técnica','Bibliotecología'],
+  SC:['Enfermería','Administración Pública','Educación','Administración de Salud','Política Social'],CS:['Enfermería','Administración Pública','Educación','Administración de Salud','Política Social'],
+  DEFAULT:['Educación','Salud','Negocios','Tecnología','Artes y Cultura']
+}};
+
+// ── REFINEMENT CAREER TAGS ──
+// rf[0]=RF1..rf[7]=RF8 | 0=A, 1=B
+var RF_TAGS={
+en:[
+  [['Psychology','Counseling','Social Work','Educational Guidance'],['Medicine','Nursing','Dentistry','Physical Therapy']],
+  [['Biology','Medicine','Biotechnology','Genetics'],['Computer Science','Data Science','Software Engineering','Artificial Intelligence']],
+  [['Graphic Design','UX Design','Visual Arts','Architecture'],['Journalism','Creative Writing','Film','Communication']],
+  [['Electrical Engineering','Electronics','Renewable Energy Technology'],['Civil Engineering','Mechanical Engineering','Construction']],
+  [['Entrepreneurship','Business Administration','Marketing'],['Law','Political Science','Public Policy']],
+  [['Software Engineering','App Development','Web Development'],['Cybersecurity','Network Security','Information Security']],
+  [['Medicine','Biology','Public Health','Genetics'],['Physics','Chemistry','Mathematics','Engineering']],
+  [['Accounting','Finance','Auditing','Economics'],['Business Administration','Human Resources','Operations Management']]
+],
+es:[
+  [['Psicología','Consejería','Trabajo Social','Orientación Educativa'],['Medicina','Enfermería','Odontología','Fisioterapia']],
+  [['Biología','Medicina','Biotecnología','Genética'],['Informática','Ciencia de Datos','Ingeniería de Software','Inteligencia Artificial']],
+  [['Diseño Gráfico','Diseño UX','Artes Visuales','Arquitectura'],['Periodismo','Escritura Creativa','Cine','Comunicación']],
+  [['Ingeniería Eléctrica','Electrónica','Tecnología de Energía Renovable'],['Ingeniería Civil','Ingeniería Mecánica','Construcción']],
+  [['Emprendimiento','Administración de Empresas','Marketing'],['Derecho','Ciencias Políticas','Políticas Públicas']],
+  [['Ingeniería de Software','Desarrollo de Apps','Desarrollo Web'],['Ciberseguridad','Seguridad de Redes','Seguridad Informática']],
+  [['Medicina','Biología','Salud Pública','Genética'],['Física','Química','Matemáticas','Ingeniería']],
+  [['Contabilidad','Finanzas','Auditoría','Economía'],['Administración de Empresas','Recursos Humanos','Gestión de Operaciones']]
+]};
+
+// Which RF questions (0-indexed) are most relevant for each RIASEC top-2 pair
+var PAIR_RF={
+  RI:[3,5,6],IR:[3,5,6],
+  IA:[0,1,6],AI:[0,1,6],
+  IS:[0,6],  SI:[0,6],
+  IE:[4],    EI:[4],
+  IC:[1,5,7],CI:[1,5,7],
+  AS:[2,0],  SA:[2,0],
+  AE:[2,4],  EA:[2,4],
+  SE:[4,0],  ES:[4,0],
+  EC:[4,7],  CE:[4,7],
+  RA:[3,2],  AR:[3,2],
+  RS:[0,3],  SR:[0,3],
+  RE:[3,4],  ER:[3,4],
+  RC:[3,1],  CR:[3,1],
+  AC:[2,5],  CA:[2,5],
+  SC:[0,4],  CS:[0,4]
 };
 
-/* ── DESCRIPTIONS ── */
-var RDESC = {
-  en:{
-    R:'You are practical, hands-on, and enjoy working with tools, machines, or the natural world.',
-    I:'You are curious, analytical, and love exploring ideas and solving intellectual puzzles.',
-    A:'You are creative, expressive, and drawn to originality and self-expression.',
-    S:'You are empathetic, collaborative, and fulfilled by helping others grow.',
-    E:'You are ambitious, persuasive, and energized by leadership and influence.',
-    C:'You are organized, detail-oriented, and value structure and accuracy.'
-  },
-  es:{
-    R:'Eres práctico/a, manual y disfrutas trabajar con herramientas, máquinas o el mundo natural.',
-    I:'Eres curioso/a, analítico/a y amas explorar ideas y resolver problemas intelectuales.',
-    A:'Eres creativo/a, expresivo/a y atraído/a por la originalidad y la autoexpresión.',
-    S:'Eres empático/a, colaborativo/a y te realizas ayudando a otros a crecer.',
-    E:'Eres ambicioso/a, persuasivo/a y te energiza el liderazgo y la influencia.',
-    C:'Eres organizado/a, orientado/a al detalle y valoras la estructura y la precisión.'
-  }
-};
-
-var B5DESC = {
-  en:{
-    Ehi:'High Extraversion — You are sociable and gain energy from connecting with others. Collaborative, outward-facing roles suit you well.',
-    Elo:'Low Extraversion — You prefer working independently or in small groups. You think deeply before speaking and recharge through solitude.',
-    Ohi:'High Openness — You are imaginative and receptive to new ideas. Creative and innovative environments bring out your best.',
-    Olo:'Low Openness — You prefer familiarity and structure. Practical, concrete, proven approaches are where you thrive.',
-    Ahi:'High Agreeableness — You are cooperative and empathetic. Team environments and helping roles align with your nature.',
-    Alo:'Low Agreeableness — You are direct and results-focused. You can be an effective negotiator or analytical critic.',
-    Chi:'High Conscientiousness — You are disciplined and reliable. You set goals, follow through, and hold yourself to high standards.',
-    Clo:'Low Conscientiousness — You are flexible and adaptable. Environments that require spontaneity and improvisation suit you.',
-    Nhi:'Higher Neuroticism — You are sensitive to stress. Building strong routines and coping strategies will be a key professional asset.',
-    Nlo:'Emotional Stability — You remain calm under pressure. This is a genuine strength in high-stakes professional environments.'
-  },
-  es:{
-    Ehi:'Alta Extraversión — Eres sociable y ganas energía del contacto con otros. Los roles colaborativos y orientados hacia afuera te favorecen.',
-    Elo:'Baja Extraversión — Prefieres trabajar de forma independiente o en grupos pequeños. Piensas profundamente antes de hablar.',
-    Ohi:'Alta Apertura — Eres imaginativo/a y receptivo/a a nuevas ideas. Los entornos creativos e innovadores sacan lo mejor de ti.',
-    Olo:'Baja Apertura — Prefieres la familiaridad y la estructura. Los enfoques prácticos y probados son donde prosperas.',
-    Ahi:'Alta Amabilidad — Eres cooperativo/a y empático/a. Los entornos de equipo y los roles de ayuda se alinean con tu naturaleza.',
-    Alo:'Baja Amabilidad — Eres directo/a y orientado/a a resultados. Puedes ser un/a negociador/a o crítico/a efectivo/a.',
-    Chi:'Alta Responsabilidad — Eres disciplinado/a y confiable. Estableces metas, las cumples y te exiges altos estándares.',
-    Clo:'Baja Responsabilidad — Eres flexible y adaptable. Los entornos que requieren espontaneidad y flexibilidad te favorecen.',
-    Nhi:'Mayor Neuroticismo — Eres sensible al estrés. Construir rutinas sólidas y estrategias de afrontamiento será un activo profesional clave.',
-    Nlo:'Estabilidad Emocional — Te mantienes tranquilo/a bajo presión. Es una fortaleza genuina en entornos profesionales de alta presión.'
-  }
-};
-
-var RCOLORS = {R:'var(--riasec-r)',I:'var(--riasec-i)',A:'var(--riasec-a)',S:'var(--riasec-s)',E:'var(--riasec-e)',C:'var(--riasec-c)'};
-var B5COLORS = {E:'var(--b5-e)',O:'var(--b5-o)',A:'var(--b5-a)',C:'var(--b5-c)',N:'var(--b5-n)'};
-
-/* ── LANG ── */
-function setLang(l) {
-  lang = l;
-  document.querySelectorAll('.lang-btn').forEach(function(b){
-    b.classList.toggle('active', (l==='en'&&b.textContent==='English')||(l==='es'&&b.textContent==='Español'));
+function getRefinedCareers(sortedR, rfAnswers, l) {
+  var pair = sortedR[0] + sortedR[1];
+  var relevant = PAIR_RF[pair] || [];
+  var seen = {}, result = [];
+  relevant.forEach(function(rfIdx) {
+    var a = rfAnswers[rfIdx];
+    if (a !== undefined) {
+      RF_TAGS[l][rfIdx][a].forEach(function(c) {
+        if (!seen[c]) { seen[c] = true; result.push(c); }
+      });
+    }
   });
+  return result.slice(0, 5);
+}
+
+// Colors
+var RCOLORS={R:'var(--riasec-r)',I:'var(--riasec-i)',A:'var(--riasec-a)',S:'var(--riasec-s)',E:'var(--riasec-e)',C:'var(--riasec-c)'};
+var B5COLORS={E:'var(--b5-e)',O:'var(--b5-o)',A:'var(--b5-a)',C:'var(--b5-c)',N:'var(--b5-n)'};
+
+function getB5Cat(pct,l){
+  var t=T[l];
+  if(pct<=20)return t.catVeryLow;if(pct<=40)return t.catLow;if(pct<=60)return t.catMod;if(pct<=80)return t.catHigh;return t.catVeryHigh;
+}
+
+// ── LANGUAGE ──
+function setLang(l){
+  lang=l;
+  document.querySelectorAll('.lang-btn').forEach(function(b){b.classList.toggle('active',(l==='en'&&b.textContent==='English')||(l==='es'&&b.textContent==='Español'));});
   applyLang();
 }
-
-function applyLang() {
-  var t = T[lang];
-  document.getElementById('hdr-eyebrow').textContent = t.hdrEyebrow;
-  document.getElementById('hdr-title').textContent = t.hdrTitle;
-  document.getElementById('hdr-sub').textContent = t.hdrSub;
-  document.getElementById('intro-lead').textContent = t.introLead;
-  document.getElementById('p1-badge').textContent = t.p1Badge;
-  document.getElementById('p1-name').textContent = t.p1Name;
-  document.getElementById('p1-sub').textContent = t.p1Sub;
-  document.getElementById('p2-badge').textContent = t.p2Badge;
-  document.getElementById('p2-name').textContent = t.p2Name;
-  document.getElementById('p2-sub').textContent = t.p2Sub;
-  document.getElementById('intro-note').textContent = t.introNote;
-  document.getElementById('btn-start').textContent = t.btnStart;
-  if(document.getElementById('btn-restart')) document.getElementById('btn-restart').textContent = t.btnRestart;
-  if(document.getElementById('screen-q').classList.contains('active')) renderQ();
-  if(document.getElementById('screen-results').classList.contains('active')) renderResults();
+function applyLang(){
+  var t=T[lang];
+  document.getElementById('hdr-eyebrow').textContent=t.hdrEyebrow;
+  document.getElementById('hdr-title').textContent=t.hdrTitle;
+  document.getElementById('hdr-sub').textContent=t.hdrSub;
+  document.getElementById('intro-lead').textContent=t.introLead;
+  document.getElementById('p1-badge').textContent=t.p1Badge;document.getElementById('p1-name').textContent=t.p1Name;document.getElementById('p1-sub').textContent=t.p1Sub;
+  document.getElementById('p2-badge').textContent=t.p2Badge;document.getElementById('p2-name').textContent=t.p2Name;document.getElementById('p2-sub').textContent=t.p2Sub;
+  document.getElementById('p3-badge').textContent=t.p3Badge;document.getElementById('p3-name').textContent=t.p3Name;document.getElementById('p3-sub').textContent=t.p3Sub;
+  document.getElementById('intro-note').textContent=t.introNote;
+  document.getElementById('btn-start').textContent=t.btnStart;
+  if(document.getElementById('btn-restart'))document.getElementById('btn-restart').textContent=t.btnRestart;
+  if(document.getElementById('screen-q').classList.contains('active'))renderQ();
+  if(document.getElementById('screen-results').classList.contains('active'))renderResults();
 }
 
-/* ── FLOW ── */
-function startTest() {
+// ── FLOW ──
+function startTest(){
   document.getElementById('screen-intro').classList.remove('active');
   document.getElementById('screen-q').classList.add('active');
-  currentQ = 0; answers = {};
-  renderQ();
+  currentQ=0;answers={};renderQ();
 }
 
-function renderQ() {
-  var total = RQ.length + BQ.length;
-  var pct = Math.round((currentQ / total) * 100);
-  document.getElementById('progress-fill').style.width = pct + '%';
-  var t = T[lang];
-  var isR = currentQ < RQ.length;
-  var badge = document.getElementById('section-badge');
-  badge.textContent = isR ? t.badgeR : t.badgeB;
-  badge.className = 'section-badge ' + (isR ? 'riasec' : 'big5');
-  document.getElementById('q-counter').textContent = (currentQ+1) + ' ' + t.of + ' ' + total;
-  var cur = answers[currentQ];
+function renderQ(){
+  var t=T[lang];
+  var pct=Math.round((currentQ/TOTAL)*100);
+  document.getElementById('progress-fill').style.width=pct+'%';
+  var cur=answers[currentQ];
+  var isR=currentQ<TOTAL_RQ;
+  var isB=currentQ>=TOTAL_RQ && currentQ<TOTAL_RQ+TOTAL_BQ;
+  var isRF=currentQ>=TOTAL_RQ+TOTAL_BQ;
+  var badge=document.getElementById('section-badge');
+  var ri=document.getElementById('refine-intro');
 
-  if(isR) {
-    var q = RQ[currentQ];
-    document.getElementById('q-instruction').textContent = t.instructFC;
-    document.getElementById('q-text').textContent = '';
-    document.getElementById('q-input').innerHTML =
-      '<div class="choice-grid">' +
-        '<button class="choice-btn'+(cur===0?' selected':'')+'" onclick="pick(0)">' +
-          '<span class="choice-letter">A</span>'+q[lang][0]+'</button>' +
-        '<button class="choice-btn'+(cur===1?' selected':'')+'" onclick="pick(1)">' +
-          '<span class="choice-letter">B</span>'+q[lang][1]+'</button>' +
-      '</div>';
-  } else {
-    var qi = currentQ - RQ.length;
-    var q = BQ[qi];
-    document.getElementById('q-instruction').textContent = t.instructLK;
-    document.getElementById('q-text').textContent = q[lang];
-    var html = '<div class="likert-endpoints"><span>'+t.likertLabels[0]+'</span><span>'+t.likertLabels[4]+'</span></div>' +
-               '<div class="likert-grid">';
-    for(var i=1;i<=5;i++) {
-      html += '<button class="likert-btn'+(cur===i?' selected':'')+'" onclick="pick('+i+')">'+i+'</button>';
-    }
-    html += '</div>';
-    document.getElementById('q-input').innerHTML = html;
+  if(isR){badge.textContent=t.badgeR;badge.className='section-badge riasec';ri.classList.remove('visible');}
+  else if(isB){badge.textContent=t.badgeB;badge.className='section-badge big5';ri.classList.remove('visible');}
+  else{badge.textContent=t.badgeRF;badge.className='section-badge refine';
+    if(currentQ===TOTAL_RQ+TOTAL_BQ){ri.textContent=t.refineIntro;ri.classList.add('visible');}
+    else{ri.classList.remove('visible');}
   }
+  document.getElementById('q-counter').textContent=(currentQ+1)+' '+t.of+' '+TOTAL;
 
-  document.getElementById('btn-next').disabled = (cur === undefined);
+  if(isR){
+    var q=RQ[currentQ];
+    document.getElementById('q-instruction').textContent=t.instructFC;
+    document.getElementById('q-text').textContent='';
+    document.getElementById('q-input').innerHTML=
+      '<div class="choice-grid">'+
+        '<button class="choice-btn'+(cur===0?' selected':'')+'" onclick="pick(0)"><span class="choice-letter">A</span>'+q[lang][0]+'</button>'+
+        '<button class="choice-btn'+(cur===1?' selected':'')+'" onclick="pick(1)"><span class="choice-letter">B</span>'+q[lang][1]+'</button>'+
+      '</div>';
+  } else if(isB){
+    var qi=currentQ-TOTAL_RQ,q=BQ[qi];
+    document.getElementById('q-instruction').textContent=t.instructLK;
+    document.getElementById('q-text').textContent=q[lang];
+    var html='<div class="likert-endpoints"><span>'+t.likertLabels[0]+'</span><span>'+t.likertLabels[4]+'</span></div><div class="likert-grid">';
+    for(var i=1;i<=5;i++)html+='<button class="likert-btn'+(cur===i?' selected':'')+'" onclick="pick('+i+')">'+i+'</button>';
+    html+='</div>';
+    document.getElementById('q-input').innerHTML=html;
+  } else {
+    var rfi=currentQ-TOTAL_RQ-TOTAL_BQ,q=RFQ[rfi];
+    document.getElementById('q-instruction').textContent=t.instructRF;
+    document.getElementById('q-text').textContent=q[lang==='es'?'es_q':'en_q'];
+    document.getElementById('q-input').innerHTML=
+      '<div class="choice-grid">'+
+        '<button class="choice-btn refine-btn'+(cur===0?' selected':'')+'" onclick="pick(0)"><span class="choice-letter">A</span>'+q[lang][0]+'</button>'+
+        '<button class="choice-btn refine-btn'+(cur===1?' selected':'')+'" onclick="pick(1)"><span class="choice-letter">B</span>'+q[lang][1]+'</button>'+
+      '</div>';
+  }
+  document.getElementById('btn-next').disabled=(cur===undefined);
 }
 
-function pick(val) {
-  answers[currentQ] = val;
-  document.getElementById('btn-next').disabled = false;
-  renderQ();
-}
+function pick(val){answers[currentQ]=val;document.getElementById('btn-next').disabled=false;renderQ();}
 
-function nextQ() {
-  if(answers[currentQ] === undefined) return;
+function nextQ(){
+  if(answers[currentQ]===undefined)return;
   currentQ++;
-  var total = RQ.length + BQ.length;
-  if(currentQ >= total) { showResults(); return; }
+  if(currentQ>=TOTAL){showResults();return;}
   renderQ();
 }
 
-/* ── RESULTS ── */
-function showResults() {
+// ── RESULTS ──
+function showResults(){
   document.getElementById('screen-q').classList.remove('active');
   document.getElementById('screen-results').classList.add('active');
   renderResults();
 }
 
-function renderResults() {
-  var t = T[lang];
-  document.getElementById('r-title').textContent = t.rTitle;
-  document.getElementById('r-sub').textContent = t.rSub;
-  document.getElementById('r-riasec-label').textContent = t.rRiasecLabel;
-  document.getElementById('r-code-label').textContent = t.rCodeLabel;
-  document.getElementById('r-b5-label').textContent = t.rB5Label;
-  document.getElementById('r-careers-label').textContent = t.rCareersLabel;
-  document.getElementById('r-careers-sub').textContent = t.rCareersSub;
-  document.getElementById('r-profile-label').textContent = t.rProfileLabel;
-  document.getElementById('btn-restart').textContent = t.btnRestart;
+function renderResults(){
+  var t=T[lang];
+  document.getElementById('r-title').textContent=t.rTitle;
+  document.getElementById('r-sub').textContent=t.rSub;
+  document.getElementById('r-disclaimer').textContent=t.rDisclaimer;
+  document.getElementById('r-riasec-label').textContent=t.rRiasecLabel;
+  document.getElementById('r-code-label').textContent=t.rCodeLabel;
+  document.getElementById('r-b5-label').textContent=t.rB5Label;
+  document.getElementById('r-careers-label').textContent=t.rCareersLabel;
+  document.getElementById('r-careers-sub').textContent=t.rCareersSub;
+  document.getElementById('r-refined-label').textContent=t.rRefinedLabel;
+  document.getElementById('r-refined-sub').textContent=t.rRefinedSub;
+  document.getElementById('r-profile-label').textContent=t.rProfileLabel;
+  document.getElementById('btn-restart').textContent=t.btnRestart;
 
-  /* RIASEC scores */
-  var rs = {R:0,I:0,A:0,S:0,E:0,C:0};
-  for(var i=0;i<RQ.length;i++) { if(answers[i]!==undefined) rs[RQ[i].c[answers[i]]]++; }
-  var sorted = Object.keys(rs).sort(function(a,b){return rs[b]-rs[a]});
-  var maxR = Math.max.apply(null,Object.values(rs))||1;
-  var barsHtml = '';
-  sorted.forEach(function(k){
-    var pct = Math.round((rs[k]/maxR)*100);
-    barsHtml += '<div class="bar-row">'+
-      '<div class="bar-meta"><span class="bar-meta-name">'+t.rNames[k]+'</span><span class="bar-meta-val">'+rs[k]+'/5</span></div>'+
-      '<div class="bar-track"><div class="bar-fill" style="width:'+pct+'%;background:'+RCOLORS[k]+'"></div></div>'+
-    '</div>';
+  // RIASEC (C = Conventional)
+  var rs={R:0,I:0,A:0,S:0,E:0,C:0};
+  for(var i=0;i<TOTAL_RQ;i++){if(answers[i]!==undefined)rs[RQ[i].c[answers[i]]]++;}
+  var sortedR=Object.keys(rs).sort(function(a,b){return rs[b]-rs[a]});
+  var maxR=Math.max.apply(null,Object.values(rs))||1;
+  var rHtml='';
+  sortedR.forEach(function(k){
+    var bp=Math.round((rs[k]/maxR)*100);
+    rHtml+='<div class="bar-row"><div class="bar-meta"><span class="bar-meta-name">'+t.rNames[k]+'</span><span class="bar-meta-val">'+rs[k]+'/10</span></div>'+
+      '<div class="bar-track"><div class="bar-fill" style="width:'+bp+'%;background:'+RCOLORS[k]+'"></div></div></div>';
   });
-  document.getElementById('r-riasec-bars').innerHTML = barsHtml;
-  document.getElementById('r-code').textContent = sorted.slice(0,3).join('');
-  document.getElementById('r-riasec-desc').textContent = RDESC[lang][sorted[0]];
+  document.getElementById('r-riasec-bars').innerHTML=rHtml;
+  document.getElementById('r-code').textContent=sortedR.slice(0,3).join('');
+  document.getElementById('r-riasec-desc').textContent=RDESC[lang][sortedR[0]];
 
-  /* Big Five scores */
-  var b5s = {E:0,O:0,A:0,C:0,N:0};
-  var b5c = {E:0,O:0,A:0,C:0,N:0};
-  for(var i=0;i<BQ.length;i++){
-    var qi = RQ.length+i; var a = answers[qi];
-    if(a!==undefined){ var v=BQ[i].r?(6-a):a; b5s[BQ[i].t]+=v; b5c[BQ[i].t]++; }
+  // Big Five (C = Conscientiousness)
+  var b5s={E:0,O:0,A:0,C:0,N:0},b5cnt={E:0,O:0,A:0,C:0,N:0};
+  for(var i=0;i<TOTAL_BQ;i++){
+    var qi=TOTAL_RQ+i,a=answers[qi];
+    if(a!==undefined){var v=BQ[i].r?(6-a):a;b5s[BQ[i].t]+=v;b5cnt[BQ[i].t]++;}
   }
-  var b5Html='';
-  ['E','O','A','C','N'].forEach(function(k){
-    var avg=b5c[k]>0?b5s[k]/b5c[k]:3;
-    var pct=Math.round(((avg-1)/4)*100);
-    b5Html+='<div class="bar-row">'+
-      '<div class="bar-meta"><span class="bar-meta-name">'+t.b5Names[k]+'</span><span class="bar-meta-val">'+pct+'%</span></div>'+
-      '<div class="bar-track"><div class="bar-fill" style="width:'+pct+'%;background:'+B5COLORS[k]+'"></div></div>'+
-    '</div>';
-  });
-  document.getElementById('r-b5-bars').innerHTML = b5Html;
-
-  /* B5 description */
-  var b5Desc='';
-  ['E','O','A','C','N'].forEach(function(k){
-    var avg=b5c[k]>0?b5s[k]/b5c[k]:3;
+  var b5Keys=['E','O','A','C','N'],b5Html='',b5Desc='',b5Avgs={};
+  b5Keys.forEach(function(k){
+    var avg=b5cnt[k]>0?b5s[k]/b5cnt[k]:3;b5Avgs[k]=avg;
+    var pct=Math.round(((avg-1)/4)*100),cat=getB5Cat(pct,lang);
+    b5Html+='<div class="bar-row"><div class="bar-meta"><span class="bar-meta-name">'+t.b5Names[k]+'</span><span class="bar-meta-val">'+cat+'</span></div>'+
+      '<div class="bar-track"><div class="bar-fill" style="width:'+pct+'%;background:'+B5COLORS[k]+'"></div></div></div>';
     b5Desc+=B5DESC[lang][k+(avg>=3?'hi':'lo')]+' ';
   });
-  document.getElementById('r-b5-desc').textContent = b5Desc.trim();
+  document.getElementById('r-b5-bars').innerHTML=b5Html;
+  document.getElementById('r-b5-desc').textContent=b5Desc.trim();
 
-  /* Careers */
-  var top2 = sorted.slice(0,2).join('');
-  var careers = CM[lang][top2]||CM[lang].DEFAULT;
-  document.getElementById('r-careers-grid').innerHTML = careers.map(function(c){
-    return '<div class="career-pill">'+c+'</div>';
-  }).join('');
+  // Base careers
+  var top2=sortedR.slice(0,2).join('');
+  var careers=CM[lang][top2]||CM[lang]['DEFAULT'];
+  document.getElementById('r-careers-grid').innerHTML=careers.map(function(c){return '<div class="career-pill">'+c+'</div>';}).join('');
 
-  /* Combined profile */
-  document.getElementById('r-profile-text').textContent = buildProfile(sorted,b5s,b5c);
+  // Refined careers from Part 3
+  var rfAnswers={};
+  for(var i=0;i<TOTAL_RF;i++){
+    var qi=TOTAL_RQ+TOTAL_BQ+i;
+    if(answers[qi]!==undefined)rfAnswers[i]=answers[qi];
+  }
+  var refined=getRefinedCareers(sortedR,rfAnswers,lang);
+  var refinedBlock=document.getElementById('r-refined-block');
+  if(refined.length>0){
+    refinedBlock.style.display='block';
+    document.getElementById('r-refined-grid').innerHTML=refined.map(function(c){return '<div class="career-pill refined">'+c+'</div>';}).join('');
+  } else {
+    refinedBlock.style.display='none';
+  }
+
+  // Combined profile
+  document.getElementById('r-profile-text').textContent=buildProfile(sortedR,b5Avgs);
 }
 
-function buildProfile(sorted,b5s,b5c) {
-  var t = T[lang];
-  var isEs = lang==='es';
-  var r1=sorted[0],r2=sorted[1],r3=sorted[2];
-  var eA=b5c.E>0?b5s.E/b5c.E:3,oA=b5c.O>0?b5s.O/b5c.O:3;
-  var aA=b5c.A>0?b5s.A/b5c.A:3,cA=b5c.C>0?b5s.C/b5c.C:3,nA=b5c.N>0?b5s.N/b5c.N:3;
-  var extro=eA>=3,open=oA>=3,agree=aA>=3,consc=cA>=3,stable=nA<3;
-  var n=t.rNames;
-  if(isEs){
-    var p='Tu perfil combina una orientación '+n[r1].toLowerCase()+', '+n[r2].toLowerCase()+' y '+n[r3].toLowerCase()+'. ';
-    p+=(extro?'Eres una persona sociable que gana energía del contacto con otros. ':'Eres reflexivo/a y prefieres entornos más tranquilos y enfocados. ');
-    p+=(open?'Tu apertura a nuevas ideas sugiere que te atraen los enfoques creativos e innovadores. ':'Tiendes a confiar en métodos probados y valoras la estructura. ');
-    p+=(agree?'Tu naturaleza colaborativa y empática te hace valioso/a en roles de equipo y servicio. ':'Tu directividad puede ser una gran fortaleza en la negociación y la toma de decisiones. ');
-    p+=(consc?'Eres disciplinado/a y confiable — cualidades que te llevarán lejos en cualquier campo. ':'Eres adaptable y espontáneo/a, ideal para entornos que requieren flexibilidad. ');
-    p+=(stable?'Tu estabilidad emocional es un activo en situaciones de alta presión. ':'Ser consciente de tu sensibilidad emocional te ayudará a construir hábitos de resiliencia sólidos. ');
-    p+='Busca oportunidades que combinen '+n[r1].toLowerCase()+' y '+n[r2].toLowerCase()+' con tus fortalezas personales.';
+function buildProfile(sortedR,b5Avgs){
+  var t=T[lang],n=t.rNames;
+  var r1=sortedR[0],r2=sortedR[1],r3=sortedR[2];
+  var extro=b5Avgs.E>=3,open=b5Avgs.O>=3,agree=b5Avgs.A>=3,consc=b5Avgs.C>=3,stable=b5Avgs.N<3;
+  if(lang==='es'){
+    var p='Tus resultados sugieren una combinación de orientaciones '+n[r1].toLowerCase()+', '+n[r2].toLowerCase()+' y '+n[r3].toLowerCase()+'. ';
+    p+=(extro?'Tiendes a ganar energía en situaciones sociales, lo que puede favorecerte en roles colaborativos. ':'Tiendes a sentirte más cómodo/a en entornos independientes o de grupos pequeños. ');
+    p+=(open?'Tu apertura a nuevas ideas puede ser una ventaja en entornos que valoran la creatividad y la innovación. ':'Tu preferencia por lo conocido y estructurado puede ser un activo en roles que requieren precisión y consistencia. ');
+    p+=(agree?'Tu tendencia a la cooperación puede hacerte valioso/a en roles de equipo y servicio. ':'Tu enfoque directo puede ser una fortaleza en la negociación y la toma de decisiones. ');
+    p+=(consc?'Tu tendencia a la organización y el seguimiento de objetivos puede llevarte lejos en cualquier campo. ':'Tu flexibilidad puede ser un activo en entornos que requieren adaptación constante. ');
+    p+=(stable?'Tu estabilidad emocional puede ser una ventaja en situaciones de alta presión. ':'Desarrollar estrategias de afrontamiento puede ayudarte a gestionar mejor las situaciones exigentes. ');
+    p+='Explorar oportunidades que combinen tus orientaciones '+n[r1].toLowerCase()+' y '+n[r2].toLowerCase()+' puede ayudarte a identificar caminos que se sientan significativos y motivadores.';
     return p;
   } else {
-    var p='Your profile combines a '+n[r1]+', '+n[r2]+', and '+n[r3]+' orientation. ';
-    p+=(extro?'You are sociable and gain energy from connecting with others. ':'You are reflective and prefer quieter, more focused environments. ');
-    p+=(open?'Your openness to new ideas suggests you are drawn to creative and innovative approaches. ':'You tend to trust proven methods and value clarity and structure. ');
-    p+=(agree?'Your collaborative and empathetic nature makes you valuable in team and service roles. ':'Your directness can be a strong asset in negotiation and decision-making. ');
-    p+=(consc?'You are disciplined and reliable — qualities that will take you far in any field. ':'You are adaptable and spontaneous, well-suited for environments requiring flexibility. ');
-    p+=(stable?'Your emotional stability is a genuine asset in high-pressure situations. ':'Being aware of your emotional sensitivity will help you build strong resilience habits. ');
-    p+='Look for opportunities that combine your '+n[r1]+' and '+n[r2]+' orientations with your personal strengths.';
+    var p='Your results suggest a combination of '+n[r1]+', '+n[r2]+', and '+n[r3]+' orientations. ';
+    p+=(extro?'You may tend to gain energy from social situations, which could work in your favor in collaborative roles. ':'You may tend to feel most comfortable in independent or small-group environments. ');
+    p+=(open?'Your openness to new ideas may be an asset in environments that value creativity and innovation. ':'Your preference for familiar, structured approaches may be a strength in roles that require precision and consistency. ');
+    p+=(agree?'Your tendency toward cooperation may make you valuable in team and service roles. ':'Your direct approach may be a strength in negotiation and decision-making. ');
+    p+=(consc?'Your tendency toward organization and goal-setting may take you far in any field. ':'Your flexibility may be an asset in environments that require constant adaptation. ');
+    p+=(stable?'Your emotional stability may be an advantage in high-pressure situations. ':'Developing coping strategies may help you navigate demanding situations more comfortably. ');
+    p+='Exploring opportunities that bring together your '+n[r1]+' and '+n[r2]+' orientations may help you identify directions that feel meaningful and motivating.';
     return p;
   }
 }
 
-function restart() {
-  currentQ=0; answers={};
-  document.getElementById('screen-results').classList.remove('active');
-  document.getElementById('screen-intro').classList.add('active');
-}
+function restart(){currentQ=0;answers={};document.getElementById('screen-results').classList.remove('active');document.getElementById('screen-intro').classList.add('active');}
 </script>
 </body>
 </html>
